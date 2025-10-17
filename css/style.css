@@ -202,18 +202,6 @@ body{
   border-radius: 4px;
 }
 
-/* En pantallas pequeñas: indicar que se puede deslizar */
-@media (max-width: 760px) {
-  #pumpTableContainer::before {
-    content: "📱 Desliza horizontalmente para ver toda la tabla →";
-    display: block;
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-}
-
 @media (min-width: 760px) {
   .mobile-only { display: none; }
 }
