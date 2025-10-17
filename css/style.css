@@ -338,3 +338,23 @@ footer {
   color: var(--text-muted);
   margin: 20px 0;
 }
+
+#factoresSeguridad {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  text-align: center;
+  background: var(--accent-light);
+}
+
+#factoresSeguridad .label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+#factoresSeguridad .big {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-2);
+  margin: 0;
+}
