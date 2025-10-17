@@ -93,6 +93,9 @@ body{
 .formGrid input, .formGrid select{padding:8px;border-radius:8px;background:var(--surface);border:1px solid #e6eef2;color:inherit}
 .formGrid .muted{grid-column:span 2}
 
+/* =========================================================
+   FILA COMPLETA (Tipo de instalación)
+   ========================================================= */
 .formRowFull {
   display: flex;
   flex-direction: column;
@@ -117,55 +120,8 @@ body{
 }
 
 /* =========================================================
-   Fila de 4 columnas a ancho completo dentro del formulario
+   FILA DE 2 COLUMNAS
    ========================================================= */
-.formRow4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  width: 100%;
-  margin: 16px 0;
-}
-
-.formRow4 > div {
-  width: 100%;
-}
-
-.formRow4 label {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-  display: block;
-}
-
-.formRow4 input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #e6eef2;
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text-main);
-  box-sizing: border-box;
-}
-
-/* 💡 Fuerza que ocupe todo el ancho del contenedor padre */
-#waterControls .formRow4 {
-  grid-column: 1 / -1;
-  justify-self: stretch;
-}
-
-/* 📱 Responsive */
-@media (max-width: 1024px) {
-  .formRow4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .formRow4 {
-    grid-template-columns: 1fr;
-  }
-}
-
 .formRow2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -174,11 +130,8 @@ body{
   margin: 16px 0;
 }
 
-.formRow2 > div {
-  width: 100%;
-}
-
 .formRow2 label {
+  text-align: center;
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 4px;
@@ -193,12 +146,48 @@ body{
   border-radius: 8px;
   background: var(--surface);
   color: var(--text-main);
-  box-sizing: border-box;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* =========================================================
+   FILA DE 4 COLUMNAS
+   ========================================================= */
+.formRow4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.formRow4 label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.formRow4 input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e6eef2;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-main);
+}
+
+/* 📱 Responsive */
+@media (max-width: 1024px) {
+  .formRow4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .formRow2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .formRow4 {
     grid-template-columns: 1fr;
   }
 }

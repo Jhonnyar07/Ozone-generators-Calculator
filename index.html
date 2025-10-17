@@ -44,12 +44,17 @@
         <div id="waterControls" class="panel">
           <h3>Parámetros de diseño (Agua)</h3>
           <div class="formGrid">
-            <select id="tipoInst">
-              <option value="">-- Seleccionar Tipo de Instalación --</option>
-              <option value="Agua Potable">Agua Potable</option>
-              <option value="Aguas Residuales">Aguas Residuales</option>
-            </select>
-            <!-- 🔹 Fila 1: 2 columnas -->
+            <!-- 🔹 Fila 0: Tipo de instalación (una sola columna) -->
+            <div class="formRowFull">
+              <label for="tipoInst">Tipo de instalación</label>
+              <select id="tipoInst">
+                <option value="">-- Seleccionar --</option>
+                <option value="Agua Potable">Agua Potable</option>
+                <option value="Aguas Residuales">Aguas Residuales</option>
+              </select>
+            </div>
+
+            <!-- 🔹 Fila 1: Bomba + Cantidad -->
             <div class="formRow2">
               <div>
                 <label for="pumpSelect">Bomba de recirculación</label>
@@ -68,7 +73,7 @@
               </div>
             </div>
 
-            <!-- 🔹 Fila 2: 4 columnas -->
+            <!-- 🔹 Fila 2: Volumen + Caudales + Concentración -->
             <div class="formRow4">
               <div>
                 <label for="Vr">Volumen del recipiente (Litros)</label>
