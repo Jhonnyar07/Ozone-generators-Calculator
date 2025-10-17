@@ -251,11 +251,13 @@ loginBtn.addEventListener('click', ()=>{
         <td>${data.Pt}</td>
         <td>${Number(data.P).toFixed(2)}</td>
       </tr>`;
+      document.getElementById('pumpDownloadContainer').classList.remove('hidden');
     } else {
       resumenPump.innerHTML = '';
       Qr.value = '';
       pumpTableContainer.classList.add('hidden');
       pumpTableBody.innerHTML = `<tr><td colspan="6" class="muted">Seleccione una bomba</td></tr>`;
+      document.getElementById('pumpDownloadContainer').classList.add('hidden');
     }
   });
 
