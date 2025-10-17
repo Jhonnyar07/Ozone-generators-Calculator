@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cálculo de Generadores de Ozono</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="images/logo.jpg" alt="banner" class="banner">
+  <h1 id="mainTitle">Cálculo de Sistemas de Ozono</h1>
+  </header>
+
+  <main class="container">
+    <!-- LOGIN -->
+    <section id="loginSection" class="card">
+      <h2>Control de Acceso</h2>
+      <div class="inputRow">
+        <label>Usuario</label>
+        <input id="username" type="text" placeholder="usuario">
+      </div>
+      <div class="inputRow">
+        <label>Contraseña</label>
+        <input id="password" type="password" placeholder="contraseña">
+      </div>
+      <div class="actions">
+        <button id="loginBtn" class="btn primary">Entrar</button>
+        <p id="loginMsg" class="muted"></p>
+      </div>
+    </section>
+
+    <!-- APP -->
+    <section id="appSection" class="hidden">
+      <div class="controls card">
+
+        <div class="segmented" role="tablist" aria-label="Modo">
+          <button class="segBtn active" data-mode="water" role="tab" aria-selected="true">Ozono Agua</button>
+          <button class="segBtn" data-mode="air" role="tab" aria-selected="false">Ozono Aire</button>
+        </div>
+
+        <!-- Water controls -->
+        <div id="waterControls" class="panel">
+          <h3>Parámetros de diseño (Agua)</h3>
+          <div class="formGrid">
+            <label>Tipo de instalación</label>
+            <select id="tipoInst">
+              <option value="">-- Seleccionar --</option>
+              <option value="Agua Potable">Agua Potable</option>
+              <option value="Aguas Residuales">Aguas Residuales</option>
+            </select>
+
+            <label>Bomba de recirculación</label>
+            <select id="pumpSelect" aria-label="Bomba de recirculación">
+              <option value="">-- Seleccionar --</option>
+              <option value="CM 3-5">CM 3-5</option>
+              <option value="CM 5-7">CM 5-7</option>
+              <option value="CM 10-1">CM 10-1</option>
+              <option value="CM 10-2">CM 10-2</option>
+              <option value="MATRIX/A 5-6T">MATRIX/A 5-6T</option>
+            </select>
+
+            <label>Cantidad de bombas (paralelo)</label>
+            <input id="npump" type="number" min="1" value="1">
+
+            <label>Volumen del recipiente (Litros)</label>
+            <input id="Vr" type="number" min="0" step="any">
+
+            <label>Caudal de consumo en producción (m3/h)</label>
+            <input id="Qc" type="number" min="0" step="any">
+
+            <label>Caudal de recirculación (m3/h)</label>
+            <input id="Qr" type="number" min="0" step="any">
+
+            <label>Concentración objetivo (PPM)</label>
+            <input id="C" type="number" min="0" step="any">
+          </div>
+
+          <!-- Pump data table appears here -->
+          <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
+            <h4>Datos de la bomba seleccionada</h4>
+            <table id="pumpTable">
+              <thead>
+                <tr>
+                  <th>Consumo (Watts)</th>
+                  <th>Velocidad (RPM)</th>
+                  <th>Caudal (m³/h)</th>
+                  <th>Altura (m)</th>
+                  <th>P. trabajo @-22/55 ºC (Bar)</th>
+                  <th>P. Descarga (Bar)</th>
+                </tr>
+              </thead>
+              <tbody><tr><td colspan="6" class="muted">Seleccione una bomba</td></tr></tbody>
+            </table>
+            <div class="actions">
+              <button id="downloadPumpPDF" class="btn primary">Descargar Ficha Técnica</button>
+            </div>
+          </div>
+
+          <div id="resumenPump" class="muted small"></div>
+
+          <div id="contaminantes" class="formGrid hidden">
+            <label>Fe (g/m3)</label><input id="Fe" type="number" step="any" value="0">
+            <label>Mn (g/m3)</label><input id="Mn" type="number" step="any" value="0">
+            <label>DQO (g/m3)</label><input id="DQO" type="number" step="any" value="0">
+            <label>DBO (g/m3)</label><input id="DBO" type="number" step="any" value="0">
+            <div class="muted">Elementos contaminantes (gr/h): <span id="CmVal">0</span></div>
+          </div>
+
+          <div class="actions">
+            <button id="calcWater" class="btn primary">Calcular</button>
+            <button id="resetWater" class="btn">Reset</button>
+          </div>
+
+          <div id="waterResults" class="results hidden card">
+            <h4>Resultados</h4>
+            <div class="cols3">
+              <div>
+                <p class="label">Tiempo de tratamiento completo vaso principal (min)</p>
+                <p id="Tt" class="big"></p>
+              </div>
+              <div>
+                <p class="label">Tiempo de recirculación en tanque (min/h)</p>
+                <p id="Tr" class="big"></p>
+              </div>
+              <div>
+                <p class="label">Producción mínima esperada (g/h)</p>
+                <p id="Pe" class="big"></p>
+              </div>
+            </div>
+            <h4 class="green">Producción requerida (g/h):</h4>
+            <h4 id="Pr" class="big green"></h4>
+          </div>
+          <div id="sistemasWater" class="cardsGrid"></div>
+        </div>
+
+        <!-- Air controls -->
+        <div id="airControls" class="panel hidden">
+          <h3>Parámetros de diseño (Aire)</h3>
+          <div class="formGrid">
+            <label>Generador</label>
+            <select id="genSelect"></select>
+
+            <label>Volumen del espacio a tratar</label>
+            <input id="Vei" type="number" min="0" step="any">
+
+            <label>Unidad</label>
+            <div id="airUnitButtons" class="segmented" role="group" aria-label="Unidad">
+              <button type="button" class="segBtn active" data-unit="m3">Metros Cúbicos (m³)</button>
+              <button type="button" class="segBtn" data-unit="L">Litros (L)</button>
+            </div>
+
+            <label>Caudal gas (L/min)</label>
+            <input id="Qg" type="number" step="any">
+
+            <label>Producción (g/h)</label>
+            <input id="PrAir" type="number" step="any">
+
+            <label>Factor de Intercambio (fi)</label>
+            <input id="fi" type="range" min="0.5" max="1.2" step="0.01" value="0.8">
+            <div class="muted small">Valor fi: <span id="fiVal">0.8</span></div>
+          </div>
+
+          <div class="actions">
+            <button id="calcAir" class="btn primary">Calcular</button>
+            <button id="resetAir" class="btn">Reset</button>
+          </div>
+
+          <div id="airResults" class="results hidden card">
+            <h4>Resultados</h4>
+            <div class="cols3">
+              <div>
+                <p class="label">Concentración (g/m3)</p>
+                <p id="Co" class="big"></p>
+              </div>
+              <div>
+                <p class="label">Constante K</p>
+                <p id="kVal" class="big">1.65</p>
+              </div>
+              <div>
+                <p class="label">Factor de intercambio (fi)</p>
+                <p id="fiOut" class="big"></p>
+              </div>
+            </div>
+
+            <h4>Tabla de evolución y gráfico</h4>
+            <div id="tableAir" class="tableWrap"></div>
+            <canvas id="chartAir" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer card">
+        <p class="muted">© 2025 PID Medioambiental, S.L. • J. Aguilar & G. Balanguero • Rev. 1.03</p>
+      </footer>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
