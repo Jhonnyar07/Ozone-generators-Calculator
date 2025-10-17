@@ -177,41 +177,59 @@ body{
   font-weight: 700;
 }
 
-/* 🧾 Tabla de datos de bomba: desplazable en móvil */
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #ccc;
+  color: var(--text-main);
+  transition: background-color 0.25s, transform 0.15s, box-shadow 0.25s;
+}
+
+.btn.primary {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: var(--accent-2);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+/* =========================================================
+   TABLAS
+   ========================================================= */
 #pumpTableContainer {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   background: var(--surface);
   border-radius: var(--radius);
   padding-bottom: 8px;
 }
 
-/* Forzar ancho mínimo de la tabla para habilitar scroll */
-#pumpTable {
-  min-width: 720px;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-/* Ajustes visuales del scroll */
-#pumpTableContainer::-webkit-scrollbar {
-  height: 6px;
-}
-#pumpTableContainer::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.25);
-  border-radius: 4px;
-}
-
-@media (min-width: 760px) {
-  .mobile-only { display: none; }
-}
-
-/* 📱 Scroll solo dentro de la tabla */
 #pumpTableScroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  background: var(--surface);
-  border-radius: var(--radius);
   margin-bottom: 10px;
 }
 
@@ -221,16 +239,102 @@ body{
   border-collapse: collapse;
 }
 
+#pumpTable th,
+#pumpTable td {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+#pumpTable th {
+  background: var(--accent-light);
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
 #pumpTableScroll::-webkit-scrollbar {
   height: 6px;
 }
 #pumpTableScroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.25);
+  background-color: rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 }
 
-/* Centrar el botón de descarga */
+@media (max-width: 760px) {
+  #pumpTableScroll::before {
+    content: "📱 Desliza horizontalmente para ver toda la tabla →";
+    display: block;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+}
+
+/* Botón de descarga fuera del scroll */
 #pumpDownloadContainer {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
+}
+
+/* =========================================================
+   RESULTADOS Y SISTEMAS RECOMENDADOS
+   ========================================================= */
+.results h4 {
+  text-align: center;
+  color: var(--accent-2);
+  margin-top: 16px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Tarjetas individuales */
+.cardSmall {
+  background: var(--accent-light);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-align: center;
+}
+
+/* Botón dentro de las tarjetas */
+.cardsGrid a.btn.primary {
+  text-decoration: none;
+}
+
+/* Hover visual */
+.cardsGrid a.btn.primary:hover {
+  background-color: var(--accent-2);
+  color: #fff;
+}
+
+/* =========================================================
+   TEXTOS Y DETALLES
+   ========================================================= */
+.muted {
+  color: var(--text-muted);
+}
+
+.small {
+  font-size: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================================================
+   PIE DE PÁGINA
+   ========================================================= */
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 20px 0;
 }
