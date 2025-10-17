@@ -176,3 +176,24 @@ body{
   font-size: 22px;
   font-weight: 700;
 }
+
+/* 📱 Hacer que la tabla de bomba sea desplazable en móviles */
+#pumpTableContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* suaviza el desplazamiento en iOS */
+}
+
+#pumpTable {
+  min-width: 700px; /* fuerza ancho mínimo para habilitar scroll */
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Opcional: sutil indicador visual de desplazamiento */
+#pumpTableContainer::-webkit-scrollbar {
+  height: 6px;
+}
+#pumpTableContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
