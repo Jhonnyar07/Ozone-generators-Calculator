@@ -344,44 +344,51 @@ loginBtn.addEventListener('click', ()=>{
   resetWater.addEventListener('click', ()=>{
     Vr.value='';Qc.value='';Qr.value='';C.value='';npump.value=1;pumpSelect.value='';tipoInst.value='';
     Fe.value=0;Mn.value=0;DQO.value=0;DBO.value=0;CmVal.textContent='0';
-    waterResults.classList.add('hidden'); sistemasWater.innerHTML=''; pumpTableContainer.classList.add('hidden'); subtitulo.textContent='';
+    waterResults.classList.add('hidden'); sistemasWater.innerHTML=''; pumpTableContainer.classList.add('hidden');
+
+    const oldSubtitle = document.getElementById('subtituloSistemas');
+    if (oldSubtitle) oldSubtitle.remove();
+    sistemasWater.innerHTML = '';
   });
 
-  function showSistemas(Pr){
-  sistemasWater.innerHTML = ''; // limpia el contenido previo
+  function showSistemas(Pr) {
+  // Limpia el contenido previo y elimina subtítulo anterior si existe
+  sistemasWater.innerHTML = '';
+  const oldSubtitle = document.getElementById('subtituloSistemas');
+  if (oldSubtitle) oldSubtitle.remove();
 
   const recomendados = sistemas.filter(s => (s.min <= Pr && Pr <= s.max));
 
-  if(recomendados.length > 0){
-    // 🏷️ Insertar subtítulo dinámico dentro del mismo bloque
+  if (recomendados.length > 0) {
     const subtitulo = document.createElement('h3');
+    subtitulo.id = 'subtituloSistemas';   // 👈 para poder eliminarlo luego
     subtitulo.textContent = 'Sistemas Recomendados';
     subtitulo.style.color = 'var(--accent)';
     subtitulo.style.marginTop = '18px';
     subtitulo.style.marginBottom = '12px';
-    subtitulo.style.textAlign = 'center';   // 👈 centrado
-    // Insertamos el subtítulo justo antes del grid
+    subtitulo.style.textAlign = 'center';
     sistemasWater.parentElement.insertBefore(subtitulo, sistemasWater);
   }
 
-  if(Pr > 50){
-    const note = document.createElement('div'); note.className='cardSmall';
+  if (Pr > 50) {
+    const note = document.createElement('div');
+    note.className = 'cardSmall';
     note.innerHTML = `<h5>NOTA</h5><p>Para concentraciones mayores a 50 gr/h considere la combinación de 2 o más sistemas.</p>`;
     sistemasWater.appendChild(note);
   }
 
-  if(recomendados.length === 0){
+  if (recomendados.length === 0) {
     const info = document.createElement('div');
-    info.className='muted';
+    info.className = 'muted';
     info.textContent = 'No se encontraron sistemas recomendados para este valor de Pr.';
     sistemasWater.appendChild(info);
     return;
   }
 
   recomendados.forEach(s => {
-    const card = document.createElement('div'); card.className='cardSmall';
+    const card = document.createElement('div');
+    card.className = 'cardSmall';
 
-    // Ocultar info técnica para franquicia
     let infoHtml = '';
     if (!session.franchise) {
       infoHtml = `
