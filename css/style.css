@@ -341,19 +341,28 @@ footer {
 
 #factoresSeguridad {
   margin-top: 16px;
-  margin-bottom: 8px;
-  text-align: center;
+  margin-bottom: 12px;
+  padding: 12px;
   background: var(--accent-light);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-#factoresSeguridad .label {
+.factores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  gap: 12px;
+}
+
+.factores-grid .label {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 4px;
 }
 
-#factoresSeguridad .big {
-  font-size: 18px;
+.factores-grid .big {
+  font-size: 20px;
   font-weight: 600;
   color: var(--accent-2);
   margin: 0;
