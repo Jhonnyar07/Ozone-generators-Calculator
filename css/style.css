@@ -93,6 +93,29 @@ body{
 .formGrid input, .formGrid select{padding:8px;border-radius:8px;background:var(--surface);border:1px solid #e6eef2;color:inherit}
 .formGrid .muted{grid-column:span 2}
 
+.formRowFull {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.formRowFull label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  text-align: center; /* Centra el texto */
+}
+
+.formRowFull select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e6eef2;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-main);
+}
+
 /* =========================================================
    Fila de 4 columnas a ancho completo dentro del formulario
    ========================================================= */
