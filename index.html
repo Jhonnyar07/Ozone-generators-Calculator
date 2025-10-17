@@ -61,17 +61,24 @@
               <option value="MATRIX/A 5-6T">MATRIX/A 5-6T</option>
             </select>
 
-            <label>Cantidad de bombas (paralelo)</label>
-            <input id="npump" type="number" min="1" value="1">
-
-            <label>Volumen del recipiente (Litros)</label>
-            <input id="Vr" type="number" min="0" step="any">
-
-            <label>Caudal de consumo en producción (m3/h)</label>
-            <input id="Qc" type="number" min="0" step="any">
-
-            <label>Caudal de recirculación (m3/h)</label>
-            <input id="Qr" type="number" min="0" step="any">
+            <div class="formRow4">
+              <div>
+                <label for="npump">Cantidad de bombas (paralelo)</label>
+                <input id="npump" type="number" min="1" value="1">
+              </div>
+              <div>
+                <label for="Vr">Volumen del recipiente (Litros)</label>
+                <input id="Vr" type="number" min="0" step="any">
+              </div>
+              <div>
+                <label for="Qc">Caudal de consumo en producción (m³/h)</label>
+                <input id="Qc" type="number" min="0" step="any">
+              </div>
+              <div>
+                <label for="Qr">Caudal de recirculación (m³/h)</label>
+                <input id="Qr" type="number" min="0" step="any">
+              </div>
+            </div>
 
             <label>Concentración objetivo (PPM)</label>
             <input id="C" type="number" min="0" step="any">

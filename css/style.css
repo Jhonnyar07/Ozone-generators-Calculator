@@ -93,6 +93,43 @@ body{
 .formGrid input, .formGrid select{padding:8px;border-radius:8px;background:var(--surface);border:1px solid #e6eef2;color:inherit}
 .formGrid .muted{grid-column:span 2}
 
+.formRow4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+
+.formRow4 label {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.formRow4 input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e6eef2;
+  border-radius: 8px;
+  background: var(--surface);
+  color: inherit;
+}
+
+/* Para móviles */
+@media (max-width: 900px) {
+  .formRow4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .formRow4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Actions */
 .actions{display:flex; justify-content: center; gap:10px;margin-top:12px; margin-bottom:12px}
 .btn{
