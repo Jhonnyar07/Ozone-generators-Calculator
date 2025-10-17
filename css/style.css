@@ -165,3 +165,14 @@ body{
   min-width: 110px;
   text-align: center;
 }
+
+/* Centrar el título de parámetros de diseño (Agua y Aire) */
+#waterControls h3,
+#airControls h3 {
+  text-align: center;
+  color: var(--accent-2);
+  margin-top: 12px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+}
