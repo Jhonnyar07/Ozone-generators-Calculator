@@ -93,12 +93,19 @@ body{
 .formGrid input, .formGrid select{padding:8px;border-radius:8px;background:var(--surface);border:1px solid #e6eef2;color:inherit}
 .formGrid .muted{grid-column:span 2}
 
+/* =========================================================
+   Fila de 4 columnas a ancho completo dentro del formulario
+   ========================================================= */
 .formRow4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   width: 100%;
   margin: 16px 0;
+}
+
+.formRow4 > div {
+  width: 100%;
 }
 
 .formRow4 label {
@@ -118,13 +125,18 @@ body{
   box-sizing: border-box;
 }
 
-/* Que se adapte bien en pantallas pequeñas */
+/* 💡 Fuerza que ocupe todo el ancho del contenedor padre */
+#waterControls .formRow4 {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+}
+
+/* 📱 Responsive */
 @media (max-width: 1024px) {
   .formRow4 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media (max-width: 600px) {
   .formRow4 {
     grid-template-columns: 1fr;
