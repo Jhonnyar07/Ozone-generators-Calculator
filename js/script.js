@@ -344,7 +344,7 @@ loginBtn.addEventListener('click', ()=>{
   resetWater.addEventListener('click', ()=>{
     Vr.value='';Qc.value='';Qr.value='';C.value='';npump.value=1;pumpSelect.value='';tipoInst.value='';
     Fe.value=0;Mn.value=0;DQO.value=0;DBO.value=0;CmVal.textContent='0';
-    waterResults.classList.add('hidden'); sistemasWater.innerHTML=''; pumpTableContainer.classList.add('hidden');
+    waterResults.classList.add('hidden'); sistemasWater.innerHTML=''; pumpTableContainer.classList.add('hidden'); subtitulo='';
   });
 
   function showSistemas(Pr){
@@ -354,7 +354,7 @@ loginBtn.addEventListener('click', ()=>{
 
   if(recomendados.length > 0){
     // 🏷️ Insertar subtítulo dinámico dentro del mismo bloque
-    const subtitulo = document.createElement('h4');
+    const subtitulo = document.createElement('h3');
     subtitulo.textContent = 'Sistemas Recomendados';
     subtitulo.style.color = 'var(--accent)';
     subtitulo.style.marginTop = '18px';
