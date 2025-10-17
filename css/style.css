@@ -470,3 +470,14 @@ footer {
 label[for="tipoInst"] {
   grid-column: 1 / -1;
 }
+
+/* Fila de bombas a ancho completo */
+#waterControls .formRow2 {
+  grid-column: 1 / -1;  /* hace que la fila ocupe todo el ancho del contenedor */
+  width: 100%;
+}
+
+#waterControls .formRow2 > div {
+  flex: 1;
+  width: 100%;
+}
