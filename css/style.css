@@ -460,3 +460,13 @@ footer {
   color: var(--accent-2);
   margin: 0;
 }
+
+#tipoInst {
+  grid-column: 1 / -1;   /* ocupa todo el ancho de la rejilla */
+  width: 100%;
+}
+
+#tipoInst + label,
+label[for="tipoInst"] {
+  grid-column: 1 / -1;
+}
