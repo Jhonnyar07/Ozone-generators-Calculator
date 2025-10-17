@@ -94,7 +94,7 @@ body{
 .formGrid .muted{grid-column:span 2}
 
 /* =========================================================
-   FILA COMPLETA (Tipo de instalación)
+   FILA 1 - Tipo de instalación
    ========================================================= */
 .formRowFull {
   display: flex;
@@ -104,10 +104,11 @@ body{
 }
 
 .formRowFull label {
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-muted);
+  text-align: center;
   margin-bottom: 6px;
-  text-align: center; /* Centra el texto */
 }
 
 .formRowFull select {
@@ -120,11 +121,11 @@ body{
 }
 
 /* =========================================================
-   FILA DE 2 COLUMNAS
+   FILA 2 - Bomba y cantidad
    ========================================================= */
 .formRow2 {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   width: 100%;
   margin: 16px 0;
@@ -132,7 +133,7 @@ body{
 
 .formRow2 label {
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 4px;
   display: block;
@@ -149,11 +150,11 @@ body{
 }
 
 /* =========================================================
-   FILA DE 4 COLUMNAS
+   FILA 3 - 4 columnas
    ========================================================= */
 .formRow4 {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   width: 100%;
   margin: 16px 0;
@@ -161,7 +162,7 @@ body{
 
 .formRow4 label {
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 4px;
   display: block;
@@ -176,7 +177,7 @@ body{
   color: var(--text-main);
 }
 
-/* 📱 Responsive */
+/* Responsivo */
 @media (max-width: 1024px) {
   .formRow4 {
     grid-template-columns: repeat(2, 1fr);
