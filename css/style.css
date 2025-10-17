@@ -96,29 +96,30 @@ body{
 .formRow4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  align-items: end;
-  margin-bottom: 12px;
+  gap: 16px;
+  width: 100%;
+  margin: 16px 0;
 }
 
 .formRow4 label {
   font-size: 13px;
   color: var(--text-muted);
-  display: block;
   margin-bottom: 4px;
+  display: block;
 }
 
 .formRow4 input {
   width: 100%;
-  padding: 8px;
+  padding: 10px 12px;
   border: 1px solid #e6eef2;
   border-radius: 8px;
   background: var(--surface);
-  color: inherit;
+  color: var(--text-main);
+  box-sizing: border-box;
 }
 
-/* Para móviles */
-@media (max-width: 900px) {
+/* Que se adapte bien en pantallas pequeñas */
+@media (max-width: 1024px) {
   .formRow4 {
     grid-template-columns: repeat(2, 1fr);
   }
