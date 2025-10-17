@@ -1,14 +1,17 @@
-:root {
-  --accent: #00A7C8;
-  --accent-2: #007F99;
-  --accent-light: #E6F7FB;
-  --text-main: #1F2D3D;
-  --text-muted: #6B7A89;
-  --surface: #FFFFFF;
-  --background: #F5FAFC;
-  --danger: #E74C3C;
-  --success: #00B894;
-  --radius: 10px;
+:root{
+  --accent: #00A7C8;          /* azul turquesa principal */
+  --accent-2: #007F99;        /* azul más profundo */
+  --accent-light: #E6F7FB;    /* fondo suave */
+  --text-main: #1F2D3D;       /* texto principal */
+  --text-muted: #6B7A89;      /* texto secundario */
+  --surface: #FFFFFF;         /* fondo de tarjetas */
+  --background: #F5FAFC;      /* fondo general */
+  --danger: #E74C3C;          /* errores */
+  --success: #00B894;         /* confirmaciones */
+  --radius: 10px;             /* bordes redondeados */
+  --pad:14px;
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+  color-scheme: light;
 }
 
 *{box-sizing:border-box}
@@ -231,4 +234,3 @@ body{
   display: flex;
   justify-content: center;
 }
-
