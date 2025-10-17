@@ -94,46 +94,69 @@ body{
 .formGrid .muted{grid-column:span 2}
 
 /* =========================================================
-   FILA 1 - Tipo de instalación
+   Fila de 4 columnas a ancho completo dentro del formulario
    ========================================================= */
-.formRowFull {
-  display: flex;
-  flex-direction: column;
+.formRow4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   width: 100%;
   margin: 16px 0;
 }
 
-.formRowFull label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-align: center;
-  margin-bottom: 6px;
+.formRow4 > div {
+  width: 100%;
 }
 
-.formRowFull select {
+.formRow4 label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.formRow4 input {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #e6eef2;
   border-radius: 8px;
   background: var(--surface);
   color: var(--text-main);
+  box-sizing: border-box;
 }
 
-/* =========================================================
-   FILA 2 - Bomba y cantidad
-   ========================================================= */
+/* 💡 Fuerza que ocupe todo el ancho del contenedor padre */
+#waterControls .formRow4 {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+}
+
+/* 📱 Responsive */
+@media (max-width: 1024px) {
+  .formRow4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .formRow4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 .formRow2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   width: 100%;
   margin: 16px 0;
 }
 
+.formRow2 > div {
+  width: 100%;
+}
+
 .formRow2 label {
-  text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 4px;
   display: block;
@@ -147,48 +170,12 @@ body{
   border-radius: 8px;
   background: var(--surface);
   color: var(--text-main);
+  box-sizing: border-box;
 }
 
-/* =========================================================
-   FILA 3 - 4 columnas
-   ========================================================= */
-.formRow4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  width: 100%;
-  margin: 16px 0;
-}
-
-.formRow4 label {
-  text-align: center;
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-  display: block;
-}
-
-.formRow4 input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #e6eef2;
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text-main);
-}
-
-/* Responsivo */
-@media (max-width: 1024px) {
-  .formRow4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Responsive */
+@media (max-width: 900px) {
   .formRow2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .formRow4 {
     grid-template-columns: 1fr;
   }
 }
