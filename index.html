@@ -44,31 +44,32 @@
         <div id="waterControls" class="panel">
           <h3>Parámetros de diseño (Agua)</h3>
           <div class="formGrid">
-            <label>Tipo de instalación</label>
             <select id="tipoInst">
               <option value="">-- Seleccionar --</option>
               <option value="Agua Potable">Agua Potable</option>
               <option value="Aguas Residuales">Aguas Residuales</option>
             </select>
-
-            <label>Bomba de recirculación</label>
-            <select id="pumpSelect" aria-label="Bomba de recirculación">
-              <option value="">-- Seleccionar --</option>
-              <option value="CM 3-5">CM 3-5</option>
-              <option value="CM 5-7">CM 5-7</option>
-              <option value="CM 10-1">CM 10-1</option>
-              <option value="CM 10-2">CM 10-2</option>
-              <option value="MATRIX/A 5-6T">MATRIX/A 5-6T</option>
-            </select>
-            
-            <label>Concentración objetivo (PPM)</label>
-            <input id="C" type="number" min="0" step="any">
-
-            <div class="formRow4">
+            <!-- 🔹 Fila 1: 2 columnas -->
+            <div class="formRow2">
+              <div>
+                <label for="pumpSelect">Bomba de recirculación</label>
+                <select id="pumpSelect" aria-label="Bomba de recirculación">
+                  <option value="">-- Seleccionar --</option>
+                  <option value="CM 3-5">CM 3-5</option>
+                  <option value="CM 5-7">CM 5-7</option>
+                  <option value="CM 10-1">CM 10-1</option>
+                  <option value="CM 10-2">CM 10-2</option>
+                  <option value="MATRIX/A 5-6T">MATRIX/A 5-6T</option>
+                </select>
+              </div>
               <div>
                 <label for="npump">Cantidad de bombas (paralelo)</label>
                 <input id="npump" type="number" min="1" value="1">
               </div>
+            </div>
+
+            <!-- 🔹 Fila 2: 4 columnas -->
+            <div class="formRow4">
               <div>
                 <label for="Vr">Volumen del recipiente (Litros)</label>
                 <input id="Vr" type="number" min="0" step="any">
@@ -80,6 +81,10 @@
               <div>
                 <label for="Qr">Caudal de recirculación (m³/h)</label>
                 <input id="Qr" type="number" min="0" step="any">
+              </div>
+              <div>
+                <label for="C">Concentración objetivo (PPM)</label>
+                <input id="C" type="number" min="0" step="any">
               </div>
             </div>
           </div>
