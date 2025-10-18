@@ -686,3 +686,11 @@ footer {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* 🔹 Elimina el fondo y sombra del contenedor de Ozono Aire */
+#airControls.panel {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
