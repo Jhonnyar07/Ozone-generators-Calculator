@@ -1,6 +1,5 @@
 // script.js - versión completa con lógica
 (() => {
-  const USERS = {"asp":"asepsia","Asp":"asepsia","Franquicia":"Fr4nquicia","franquicia":"fr4nquicia"};
   // DOM refs
   const loginSection = document.getElementById('loginSection');
   const appSection = document.getElementById('appSection');
