@@ -171,83 +171,62 @@
   }
   populateGenerators();
 
-// login
-loginBtn.addEventListener('click', ()=>{
-  const u = usernameInput.value.trim();
-  const p = passwordInput.value;
-  if(!u || !p){ alert('⚠️ Introduce usuario y contraseña ⚠️'); return; }
+// Login seguro con verificación en servidor (PHP)
+  loginBtn.addEventListener('click', async () => {
+    const u = usernameInput.value.trim();
+    const p = passwordInput.value;
+    if (!u || !p) {
+      alert('⚠️ Introduce usuario y contraseña ⚠️');
+      return;
+    }
 
-  // 🔹 Listas de usuarios por nivel
-  const aspUsers = [
-    { user: 'asp', pass: 'asepsia' },
-    { user: 'jaguilar', pass: 'Paf07664' },
-    { user: 'asanchez', pass: 'andr3s' }
-  ];
+    try {
+      const response = await fetch('login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: u, pass: p })
+      });
 
-  const franquiciaUsers = [
-    { user: 'franquicia', pass: 'fr4nquicia' },
-    { user: 'girona', pass: 'g1r0n4' },
-    { user: 'valencia', pass: 'v4lenc1a' }
-  ];
+      const data = await response.json();
 
-  // 🔹 Funciones de validación
-  const isAsp = aspUsers.some(uData => u.toLowerCase() === uData.user && p === uData.pass);
-  const isFranq = franquiciaUsers.some(uData => u.toLowerCase() === uData.user && p === uData.pass);
+      if (data.success) {
+        session.logueado = true;
+        session.asp = ['asp', 'jaguilar', 'asanchez'].includes(data.user);
+        session.franchise = ['franquicia', 'girona', 'valencia'].includes(data.user);
 
-  if(isAsp || isFranq){
-    session.logueado = true;
-    session.franchise = isFranq;
-    session.asp = isAsp;
-    loginSection.classList.add('hidden');
-    appSection.classList.remove('hidden');
-    loginMsg.textContent = '';
+        // Mostrar aplicación y ocultar login
+        loginSection.classList.add('hidden');
+        appSection.classList.remove('hidden');
+        loginMsg.textContent = '';
 
-  // 🔒 Restricciones para franquicia
-  if (isFranq) {
-    // 🔹 Ocultar completamente los campos y sus labels en Ozono Aire
-    ['Qg', 'PrAir'].forEach(id => {
-      const input = document.getElementById(id);
-      const label = document.querySelector(`label[for="${id}"]`) || input?.closest('div')?.querySelector('label');
+        // Mostrar encabezado principal
+        const mainHeader = document.getElementById('mainHeader');
+        if (mainHeader) mainHeader.style.display = 'block';
 
-      // Ocultar campo
-      if (input) input.style.display = 'none';
+        // 🔒 Si es franquicia, ocultar campos restringidos
+        if (session.franchise) {
+          ['Qg', 'PrAir'].forEach(id => {
+            const input = document.getElementById(id);
+            const label = document.querySelector(`label[for="${id}"]`) || input?.closest('div')?.querySelector('label');
+            if (input) input.style.display = 'none';
+            if (label) label.style.display = 'none';
+            const contenedor = input?.closest('div');
+            if (contenedor) contenedor.style.display = 'none';
+          });
 
-      // Ocultar label correspondiente
-      if (label) label.style.display = 'none';
+          const noGenOpt = genSelect.querySelector('option[value="Calculo sin generador asignado"]');
+          if (noGenOpt) noGenOpt.remove();
+        }
 
-      // Ocultar el contenedor padre si sigue dejando espacio
-      const contenedor = input?.closest('div');
-      if (contenedor) contenedor.style.display = 'none';
-    });
+      } else {
+        alert('❌ Usuario o contraseña incorrectos.');
+      }
 
-    // 🧩 Eliminar la opción "Calculo sin generador asignado"
-    const noGenOpt = genSelect.querySelector('option[value="Calculo sin generador asignado"]');
-    if (noGenOpt) noGenOpt.remove();
-  }
-  } else {
-    
-  }
-
-  const mainHeader = document.getElementById('mainHeader');
-
-  if (
-    aspUsers.some(user => user.user === u.toLowerCase() && user.pass === p) ||
-    franquiciaUsers.some(user => user.user === u.toLowerCase() && user.pass === p)
-  ) {
-    session.logueado = true;
-    session.franchise = franquiciaUsers.some(user => user.user === u.toLowerCase() && user.pass === p);
-    session.asp = aspUsers.some(user => user.user === u.toLowerCase() && user.pass === p);
-
-    loginSection.classList.add('hidden');
-    appSection.classList.remove('hidden');
-    loginMsg.textContent = '';
-
-    // 🔹 Mostrar el título solo después de iniciar sesión
-    mainHeader.style.display = 'block';
-  } else {
-    alert('❌ Usuario o contraseña incorrectos.'); // ⬅️ Ventana emergente nativa
-  }
-});
+    } catch (error) {
+      console.error('Error en la conexión:', error);
+      alert('❌ No se pudo conectar con el servidor. Comprueba tu conexión o contacta al administrador.');
+    }
+  });
 
 
   // segmented
