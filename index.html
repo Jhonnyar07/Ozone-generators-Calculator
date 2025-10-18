@@ -47,7 +47,7 @@
           <h3>Parámetros de diseño (Agua)</h3>
 
           <!-- 🔹 Fila 0: Tipo de instalación -->
-          <div class="formRow2">
+          <div class="formRow0">
             <div>
               <label for="tipoInst">Tipo de Instalación</label>
               <select id="tipoInst">
@@ -59,7 +59,7 @@
           </div>
 
           <!-- 🔹 Fila 1: Bomba, cantidad y caudal de recirculación -->
-          <div class="formRow4">
+          <div class="formRow1">
             <div>
               <label for="pumpSelect">Bomba de recirculación</label>
               <select id="pumpSelect" aria-label="Bomba de recirculación">
@@ -105,7 +105,7 @@
           </div>
 
           <!-- 🔹 Fila 3: Volumen, caudal de consumo y concentración -->
-          <div class="formRow4">
+          <div class="formRow3">
             <div>
               <label for="Vr">Volumen del recipiente (Litros)</label>
               <input id="Vr" type="number" min="0" step="any">
@@ -121,12 +121,26 @@
           </div>
 
           <!-- 🔹 Contaminantes (solo si Aguas Residuales) -->
-          <div id="contaminantes" class="formGrid hidden">
-            <label>Fe (g/m3)</label><input id="Fe" type="number" step="any" value="0">
-            <label>Mn (g/m3)</label><input id="Mn" type="number" step="any" value="0">
-            <label>DQO (g/m3)</label><input id="DQO" type="number" step="any" value="0">
-            <label>DBO (g/m3)</label><input id="DBO" type="number" step="any" value="0">
-            <div class="muted">Elementos contaminantes (gr/h): <span id="CmVal">0</span></div>
+          <div id="contaminantes" class="hidden">
+            <div class="cont-item">
+              <label>Fe (g/m3)</label>
+              <input id="Fe" type="number" step="any" value="0">
+            </div>
+            <div class="cont-item">
+              <label>Mn (g/m3)</label>
+              <input id="Mn" type="number" step="any" value="0">
+            </div>
+            <div class="cont-item">
+              <label>DQO (g/m3)</label>
+              <input id="DQO" type="number" step="any" value="0">
+            </div>
+            <div class="cont-item">
+              <label>DBO (g/m3)</label>
+              <input id="DBO" type="number" step="any" value="0">
+            </div>
+            <div class="muted">
+              Elementos contaminantes (gr/h): <span id="CmVal">0</span>
+            </div>
           </div>
 
           <!-- 🔹 Factores de seguridad -->

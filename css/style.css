@@ -121,39 +121,32 @@ body {
 /* =========================================================
    FORMULARIOS Y BLOQUES DE CÁLCULO (OZONO AGUA)
    ========================================================= */
-.formrow0 {
+.formRow0,
+.formRow1,
+.formRow3 {
   display: grid;
   width: 100%;
   gap: 16px;
   margin: 16px 0;
   align-items: center;
 }
+.formRow0 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.formRow1 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.formRow3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-.formrow1,
-.formrow3 {
-  display: grid;
-  width: 100%;
-  gap: 16px;
-  margin: 16px 0;
-  align-items: center;
-}
-.formrow0 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-.formrow1 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.formrow3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-.formrow0 label, 
-.formrow1 label,
-.formrow3 label {
+.formRow0 label
+.formRow1 label,
+.formRow3 label {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 4px;
 }
-.formrow0 input,
-.formrow1 input,
-.formrow3 input,
-.formrow0 select,
-.formrow1 select,
-.formrow3 select {
+.formRow0 input,
+.formRow1 input,
+.formRow3 input,
+.formRow0 select,
+.formRow1 select,
+.formRow3 select {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #e6eef2;
@@ -177,10 +170,79 @@ body {
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .formrow3 { grid-template-columns: repeat(2, 1fr); }
+  .formraw0, .formRow3 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-  .formrow1, .formrow3 { grid-template-columns: 1fr; }
+  .formraw0, .formRow1, .formRow3 { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   BLOQUE CONTAMINANTES - DISEÑO 4 COLUMNAS (LABEL + INPUT)
+   ========================================================= */
+#contaminantes {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 20px 24px;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+/* Cada columna tiene su label y su input */
+#contaminantes .cont-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#contaminantes label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+#contaminantes input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #e0e6eb;
+  border-radius: 8px;
+  background: #fafcfd;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#contaminantes input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0,167,200,0.15);
+}
+
+/* Texto inferior */
+#contaminantes .muted {
+  grid-column: 1 / -1;
+  text-align: right;
+  font-size: 13px;
+  color: var(--accent-2);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  #contaminantes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  #contaminantes {
+    grid-template-columns: 1fr;
+  }
+  #contaminantes .muted {
+    text-align: left;
+  }
 }
 
 /* =========================================================
