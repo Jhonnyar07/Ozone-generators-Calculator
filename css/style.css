@@ -464,3 +464,225 @@ footer {
 .alertaO3 strong {
   color: #4a3000;
 }
+
+/* =========================================================
+   AJUSTE VISUAL - TÍTULOS DE PARÁMETROS DE DISEÑO (AGUA / AIRE)
+   ========================================================= */
+#subtituloSistemas,
+#tituloAgua,
+#tituloAire {
+  margin-top: 28px;          
+  margin-bottom: 18px;       
+  text-align: center;        
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-2);
+  border-bottom: 2px solid rgba(0,167,200,0.25);
+  padding-bottom: 6px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+/* Forzar separación visual entre el subtítulo y las cards */
+#subtituloSistemas {
+  margin-bottom: 30px !important; /* fuerza la separación */
+}
+
+/* Si las tarjetas están dentro de un grid o flex, añade espacio arriba también */
+#sistemasWater {
+  margin-top: 20px;
+}
+
+/* =========================================================
+   REESTILIZACIÓN - SECCIÓN OZONO AIRE
+   ========================================================= */
+
+#airControls {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  padding: 28px 34px;
+  margin-top: 26px;
+}
+
+
+/* --- Grid del formulario --- */
+#airControls .formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px 28px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+#airControls label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5f6b7a;
+  margin-bottom: 6px;
+}
+
+/* --- Inputs, selects y sliders --- */
+#airControls input,
+#airControls select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dbe5ea;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 14px;
+  color: #2d3e50;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+#airControls input:focus,
+#airControls select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* --- Botones de unidades (m³ / L) --- */
+#airControls .unit-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+#airControls .unit-buttons button {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #dbe5ea;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#airControls .unit-buttons button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent-2);
+}
+
+#airControls .unit-buttons button:hover {
+  background: #e6f5f7;
+}
+
+/* --- Slider --- */
+#airControls input[type="range"] {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* --- Texto fi --- */
+#airControls p {
+  font-size: 13px;
+  color: #5f6b7a;
+  margin-top: 8px;
+}
+
+/* --- Botones Calcular / Reset --- */
+#airControls .actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+#airControls .btn {
+  border-radius: 10px;
+  padding: 8px 22px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+#airControls .btn.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+#airControls .btn.primary:hover {
+  background: var(--accent-2);
+}
+
+/* ===============================
+   TABLAS DE RESULTADOS (AIRE)
+   =============================== */
+
+.styledTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+  font-size: 14px;
+}
+
+.styledTable thead {
+  background: var(--accent-light);
+}
+
+.styledTable th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--accent-2);
+  border-bottom: 2px solid var(--accent);
+}
+
+.styledTable td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #e9eef2;
+  color: #333;
+}
+
+.styledTable tr:last-child td {
+  border-bottom: none;
+}
+
+.styledTable tbody tr:hover {
+  background-color: #f6fbfd;
+}
+
+/* --- Responsive table wrapper (Aire) --- */
+.tableWrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.tableWrap::-webkit-scrollbar {
+  height: 6px;
+}
+.tableWrap::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 4px;
+}
+
+/* Centrar contenido de tablas de resultados */
+.styledTable th,
+.styledTable td {
+  text-align: center;
+}
+
+/* Pero mantener los encabezados bien alineados si prefieres solo datos centrados */
+.styledTable th {
+  text-align: center;
+  font-weight: 600;
+}
+
+#chartAir {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 25px auto 15px auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+

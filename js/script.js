@@ -297,12 +297,12 @@ loginBtn.addEventListener('click', ()=>{
   });
 
   function updateCm(){
-    const Fev = Number(Fe.value) || 0;
-    const Mnv = Number(Mn.value) || 0;
-    const DQOv = Number(DQO.value) || 0;
-    const DBOv = Number(DBO.value) || 0;
-    const Qcv = Number(Qc.value) || 0;
-    const Cm = ((Fev*0.44)+(Mnv*0.88)+(DQOv*1.5)+(DBOv*1.5))*Qcv;
+    const Fev = Number(Fe.value) || 0; // Hierro
+    const Mnv = Number(Mn.value) || 0; // Manganeso
+    const DQOv = Number(DQO.value) || 0; // DQO
+    const DBOv = Number(DBO.value) || 0; // DBO
+    const Qcv = Number(Qc.value) || 0; // Caudal de Consumo
+    const Cm = ((Fev*0.44)+(Mnv*0.88)+(DQOv*1.5)+(DBOv*1.5))*Qcv; // Produccion necesaria para eliminar contaminantes
     CmVal.textContent = Cm.toFixed(2);
     return Cm;
   }
@@ -333,8 +333,8 @@ loginBtn.addEventListener('click', ()=>{
       showSistemas(Number(Pr));
     } else {
       const Cm = updateCm();
-      const Tt = Qc_v/(Vr_v/1000);
-      const Tr = ((Vr_v/1000)/Qr_v);
+      const Tt = (((Vr_v/1000)/Qc_v)*60);
+      const Tr = ((Vr_v/1000)/Qr_v)*60;
       const Pe = (C_v * Qc_v);
       const Pr = ((1.5*Pe)/(0.8*0.9)) + Cm;
       TtOut.textContent = Number(Tt).toFixed(2);
@@ -351,8 +351,15 @@ loginBtn.addEventListener('click', ()=>{
     Fe.value=0;Mn.value=0;DQO.value=0;DBO.value=0;CmVal.textContent='0';
     waterResults.classList.add('hidden'); sistemasWater.innerHTML=''; pumpTableContainer.classList.add('hidden');
 
+    // 🔹 Eliminar subtítulo si existe
     const oldSubtitle = document.getElementById('subtituloSistemas');
     if (oldSubtitle) oldSubtitle.remove();
+
+    // 🔹 Eliminar alerta técnica si existe (buscando en todo el documento)
+    const alertaExistente = document.querySelector('.alertaO3');
+    if (alertaExistente) alertaExistente.remove();
+
+    // 🔹 Limpiar cualquier otro contenido residual
     sistemasWater.innerHTML = '';
   });
 
@@ -368,7 +375,6 @@ loginBtn.addEventListener('click', ()=>{
     const subtitulo = document.createElement('h3');
     subtitulo.id = 'subtituloSistemas';   // 👈 para poder eliminarlo luego
     subtitulo.textContent = 'Sistemas Recomendados';
-    subtitulo.style.color = 'var(--accent)';
     subtitulo.style.marginTop = '18px';
     subtitulo.style.marginBottom = '12px';
     subtitulo.style.textAlign = 'center';
@@ -376,9 +382,15 @@ loginBtn.addEventListener('click', ()=>{
   }
 
   // 🔹 Alerta por alta concentración — se muestra debajo del título "Sistemas Recomendados"
+  // 🔹 Eliminar alerta previa si existe
+  const alertaPrev = document.querySelector('.alertaO3');
+  if (alertaPrev) alertaPrev.remove();
+
+  // 🔹 Mostrar alerta solo si Pr > 43
   if (Pr > 43) {
     const alerta = document.createElement('div');
     alerta.className = 'alertaO3';
+    alerta.id = 'alertaO3';
     alerta.innerHTML = `
       ⚠️ <strong>Nota técnica:</strong> Para concentraciones mayores a <strong>43 g/h</strong>, 
       se recomienda la combinación de <strong>dos o más sistemas</strong>.
@@ -408,7 +420,7 @@ loginBtn.addEventListener('click', ()=>{
     }
 
     card.innerHTML = `
-      <h5>${s.modelo}</h5>
+      <h3>${s.modelo}</h3>
       ${infoHtml}
       <div style="margin-top:8px;">
         <a class="btn primary" href="docs/${s.pdf}" download>Ficha Técnica</a>
@@ -477,13 +489,19 @@ loginBtn.addEventListener('click', ()=>{
     }
     const times = [];
     for(let i=0;i<steps;i++) times.push(i*6);
-    // Generar tabla y gráfica simultáneamente
-    renderAirTable(times, c, ppm);
-    clearChart(); // limpia el canvas antes de redibujar
-    drawChart(times, ppm);
 
-    // Mostrar resultados
-    airResults.classList.remove('hidden');
+  // 🔹 Generar tabla y gráfica al mismo tiempo
+  tableAir.innerHTML = ''; // Limpia cualquier tabla previa
+  clearChart(); // Limpia gráfica anterior si la hay
+
+  // Primero genera la tabla
+  renderAirTable(times, c, ppm);
+
+  // Luego genera la gráfica en el siguiente ciclo del render
+  setTimeout(() => renderAirChart(times, ppm), 0);
+
+  // Mostrar resultados
+  airResults.classList.remove('hidden');
   });
 
   resetAir.addEventListener('click', ()=>{
@@ -492,49 +510,147 @@ loginBtn.addEventListener('click', ()=>{
   });
 
   function renderAirTable(times, cArr, ppmArr){
-    let html = `<div class="tableWrap"><table><thead><tr><th>Tiempo (min)</th><th>Concentración (A)</th><th>Concentración O3 (PPM)</th></tr></thead><tbody>`;
-    for(let i=0;i<times.length;i++){
-      html += `<tr><td>${times[i]}</td><td>${cArr[i].toExponential(6)}</td><td>${ppmArr[i].toFixed(6)}</td></tr>`;
+    let html = `
+      <div class="tableWrap">
+        <table class="styledTable">
+          <thead>
+            <tr>
+              <th>Tiempo (min)</th>
+              <th>Concentración (A)</th>
+              <th>Concentración O₃ (PPM)</th>
+            </tr>
+          </thead>
+          <tbody>
+    `;
+    for(let i = 0; i < times.length; i++){
+      html += `
+        <tr>
+          <td>${times[i]}</td>
+          <td>${cArr[i].toExponential(6)}</td>
+          <td>${ppmArr[i].toFixed(6)}</td>
+        </tr>
+      `;
     }
-    html += `</tbody></table></div>`;
+    html += `
+          </tbody>
+        </table>
+      </div>
+    `;
     tableAir.innerHTML = html;
   }
 
-  function drawChart(times, ppmArr){
+  function renderAirChart(times, ppmArr) {
     const ctx = chartAir.getContext('2d');
-    chartAir.style.width = '100%'; chartAir.style.height = '260px';
     const dpr = window.devicePixelRatio || 1;
-    chartAir.width = chartAir.clientWidth * dpr;
-    chartAir.height = 260 * dpr;
-    const w = chartAir.width, h = chartAir.height;
-    ctx.clearRect(0,0,w,h);
-    const margin = {l:40,r:20,t:20,b:40};
-    const plotW = w - (margin.l+margin.r);
-    const plotH = h - (margin.t+margin.b);
-    const xmin = Math.min(...times), xmax = Math.max(...times);
-    const ymin = Math.min(...ppmArr), ymax = Math.max(...ppmArr);
-    const padY = (ymax - ymin) * 0.1 || 1;
-    const y0 = ymin - padY, y1 = ymax + padY;
-    ctx.strokeStyle = '#d1eaea';
-    ctx.lineWidth = 1 * dpr;
+
+    // === Forzar ancho completo del contenedor ===
+    const containerWidth = chartAir.parentElement.clientWidth;
+    const height = 360; // altura visual equilibrada
+
+    chartAir.width = containerWidth * dpr;
+    chartAir.height = height * dpr;
+
+    chartAir.style.width = containerWidth + 'px';
+    chartAir.style.height = height + 'px';
+
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, containerWidth, height);
+
+    // === Márgenes suaves ===
+    const margin = { top: 25, right: 35, bottom: 50, left: 70 };
+    const plotW = containerWidth - margin.left - margin.right;
+    const plotH = height - margin.top - margin.bottom;
+
+    const xmin = Math.min(...times);
+    const xmax = Math.max(...times);
+    const ymin = 0;
+    const ymax = Math.max(...ppmArr) * 1.05;
+
+    const xScale = x => margin.left + ((x - xmin) / (xmax - xmin)) * plotW;
+    const yScale = y => margin.top + plotH - ((y - ymin) / (ymax - ymin)) * plotH;
+
+    // === Fondo ===
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(margin.left, margin.top, plotW, plotH);
+
+    // === Cuadrícula ===
+    ctx.strokeStyle = "#edf2f3";
+    ctx.lineWidth = 1;
+    const yTicks = 6;
+    const yStep = (ymax - ymin) / yTicks;
+    for (let i = 0; i <= yTicks; i++) {
+      const y = yScale(ymin + i * yStep);
+      ctx.beginPath();
+      ctx.moveTo(margin.left, y);
+      ctx.lineTo(margin.left + plotW, y);
+      ctx.stroke();
+    }
+
+    // === Ejes ===
+    ctx.strokeStyle = "#c3d7da";
+    ctx.lineWidth = 1.4;
     ctx.beginPath();
-    ctx.moveTo(margin.l, margin.t); ctx.lineTo(margin.l, margin.t+plotH);
-    ctx.moveTo(margin.l, margin.t+plotH); ctx.lineTo(margin.l+plotW, margin.t+plotH);
+    ctx.moveTo(margin.left, margin.top);
+    ctx.lineTo(margin.left, margin.top + plotH);
+    ctx.lineTo(margin.left + plotW, margin.top + plotH);
     ctx.stroke();
+
+    // === Eje X ===
+    const xTicks = 7;
+    const xStep = (xmax - xmin) / xTicks;
+    ctx.fillStyle = "#34495e";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.font = "13px 'Inter', system-ui, Arial";
+    for (let i = 0; i <= xTicks; i++) {
+      const xVal = xmin + i * xStep;
+      const x = xScale(xVal);
+      ctx.fillText(xVal.toFixed(0), x, margin.top + plotH + 6);
+    }
+
+    // === Eje Y ===
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (let i = 0; i <= yTicks; i++) {
+      const yVal = ymin + i * yStep;
+      const y = yScale(yVal);
+      ctx.fillText(yVal.toFixed(2), margin.left - 10, y);
+    }
+
+    // === Línea de datos (degradado) ===
+    const gradient = ctx.createLinearGradient(margin.left, margin.top, margin.left + plotW, margin.top);
+    gradient.addColorStop(0, "#2a9d8f");
+    gradient.addColorStop(1, "#006d77");
+
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(11,107,122,0.9)';
-    ctx.lineWidth = 2 * dpr;
-    for(let i=0;i<times.length;i++){
-      const x = margin.l + ((times[i]-xmin)/(xmax-xmin||1)) * plotW;
-      const y = margin.t + plotH - ((ppmArr[i]-y0)/(y1-y0||1)) * plotH;
-      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 2.2;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    for (let i = 0; i < times.length; i++) {
+      const x = xScale(times[i]);
+      const y = yScale(ppmArr[i]);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     }
     ctx.stroke();
-    ctx.fillStyle = '#0f1720';
-    ctx.font = `${12 * dpr}px Arial`;
-    ctx.fillText('Tiempo (min)', margin.l + plotW/2 - 30, margin.t+plotH + 30);
-    ctx.save(); ctx.translate(10, margin.t + plotH/2 + 30); ctx.rotate(-Math.PI/2); ctx.fillText('Concentración O3 (PPM)', 0,0); ctx.restore();
+
+    // === Etiquetas de ejes ===
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "13px 'Inter', system-ui, Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText("Tiempo (min)", margin.left + plotW / 2, margin.top + plotH + 28);
+
+    ctx.save();
+    ctx.translate(20, margin.top + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Concentración O₃ (PPM)", 0, 0);
+    ctx.restore();
   }
+
   function clearChart(){ const ctx = chartAir.getContext('2d'); ctx.clearRect(0,0,chartAir.width,chartAir.height); }
 
   // init

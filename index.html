@@ -9,8 +9,12 @@
 <body>
   <header class="header">
     <img src="images/logo.jpg" alt="banner" class="banner">
-    <h1 id="mainTitle">Cálculo de Sistemas de Ozono</h1>
+    <h1 id="mainTitle">Simulador de Sistemas de Ozono</h1>
   </header>
+
+  <div class="panel">
+
+  </div>
 
   <main class="container">
     <!-- LOGIN -->
@@ -44,8 +48,7 @@
              SECCIÓN OZONO AGUA
         ========================== -->
         <div id="waterControls" class="panel">
-          <h3>Parámetros de diseño (Agua)</h3>
-
+          <h3 id="tituloAgua">Parámetros de diseño (Agua)</h3>
           <!-- 🔹 Fila 0: Tipo de instalación -->
           <div class="formRow0">
             <div>
@@ -83,7 +86,6 @@
 
           <!-- 🔹 Fila 2: Tabla de bomba -->
           <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
-            <h3>Datos de la bomba seleccionada</h3>
             <div id="pumpTableScroll">
               <table id="pumpTable">
                 <thead>
@@ -139,7 +141,7 @@
               <input id="DBO" type="number" step="any" value="0">
             </div>
             <div class="muted">
-              Elementos contaminantes (gr/h): <span id="CmVal">0</span>
+              Producción Necesaria para eliminación de Elementos contaminantes: <strong><span id="CmVal">0</span> gr/h</strong>
             </div>
           </div>
 
@@ -169,7 +171,7 @@
 
           <!-- 🔹 Resultados -->
           <div id="waterResults" class="results hidden card">
-            <h4>Resultados</h4>
+            <h3 id="tituloAgua">Resultados</h3>
             <!-- 🔹 Nota explicativa de resultados -->
             <div id="notaParametros" class="card noteBox">
               <h4>🧩 Descripción de los parámetros</h4>
@@ -193,40 +195,50 @@
             </div>
             <h3 class="green">Producción requerida (g/h)</h3>
             <h3 id="Pr" class="big green"></h3>
+            <div id="sistemasWater" class="cardsGrid"></div>
           </div>
-          <div id="sistemasWater" class="cardsGrid"></div>
         </div>
-
-        <!-- 🔹 Nota explicativa de resultados -->
 
 
         <!-- =========================
              SECCIÓN OZONO AIRE
         ========================== -->
         <div id="airControls" class="panel hidden">
-          <h3>Parámetros de diseño (Aire)</h3>
+          <h3 id="tituloAire">Parámetros de diseño (Aire)</h3>
           <div class="formGrid">
-            <label>Generador</label>
-            <select id="genSelect"></select>
-
-            <label>Volumen del espacio a tratar</label>
-            <input id="Vei" type="number" min="0" step="any">
-
-            <label>Unidad</label>
-            <div id="airUnitButtons" class="segmented" role="group" aria-label="Unidad">
-              <button type="button" class="segBtn active" data-unit="m3">Metros Cúbicos (m³)</button>
-              <button type="button" class="segBtn" data-unit="L">Litros (L)</button>
+            <div>
+              <label>Generador</label>
+              <select id="genSelect"></select>
             </div>
 
-            <label>Caudal gas (L/min)</label>
-            <input id="Qg" type="number" step="any">
+            <div>
+              <label>Caudal gas (L/min)</label>
+              <input id="Qg" type="number" step="any">
+            </div>
 
-            <label>Producción (g/h)</label>
-            <input id="PrAir" type="number" step="any">
+            <div>
+              <label>Producción (g/h)</label>
+              <input id="PrAir" type="number" step="any">
+            </div>
 
-            <label>Factor de Intercambio (fi)</label>
-            <input id="fi" type="range" min="0.5" max="1.2" step="0.01" value="0.8">
-            <div class="muted small">Valor fi: <span id="fiVal">0.8</span></div>
+            <div>
+              <label>Volumen del espacio a tratar</label>
+              <input id="Vei" type="number" min="0" step="any">
+            </div>
+
+            <div>
+              <label>Unidad</label>
+              <div id="airUnitButtons" class="segmented" role="group" aria-label="Unidad">
+                <button type="button" class="segBtn active" data-unit="m3">Metros Cúbicos (m³)</button>
+                <button type="button" class="segBtn" data-unit="L">Litros (L)</button>
+              </div>
+            </div>
+
+            <div>
+              <label>Factor de Intercambio (fi)</label>
+              <input id="fi" type="range" min="0.5" max="1.2" step="0.01" value="0.8">
+              <div class="muted small">Valor fi: <span id="fiVal">0.8</span></div>
+            </div>
           </div>
 
           <div class="actions">
@@ -252,8 +264,10 @@
             </div>
 
             <h4>Tabla de evolución y gráfico</h4>
-            <div id="tableAir" class="tableWrap"></div>
-            <canvas id="chartAir" height="200"></canvas>
+            <div class="flexWrap">
+              <div id="tableAir" class="tableWrap"></div>
+              <canvas id="chartAir" height="200"></canvas>
+            </div>
           </div>
         </div>
       </div>
