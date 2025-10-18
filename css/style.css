@@ -121,27 +121,39 @@ body {
 /* =========================================================
    FORMULARIOS Y BLOQUES DE CÁLCULO (OZONO AGUA)
    ========================================================= */
-.formRow2,
-.formRow4 {
+.formrow0 {
   display: grid;
   width: 100%;
   gap: 16px;
   margin: 16px 0;
   align-items: center;
 }
-.formRow2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.formRow4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-.formRow2 label,
-.formRow4 label {
+.formrow1,
+.formrow3 {
+  display: grid;
+  width: 100%;
+  gap: 16px;
+  margin: 16px 0;
+  align-items: center;
+}
+.formrow0 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.formrow1 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.formrow3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.formrow0 label, 
+.formrow1 label,
+.formrow3 label {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 4px;
 }
-.formRow2 input,
-.formRow4 input,
-.formRow2 select,
-.formRow4 select {
+.formrow0 input,
+.formrow1 input,
+.formrow3 input,
+.formrow0 select,
+.formrow1 select,
+.formrow3 select {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #e6eef2;
@@ -165,10 +177,10 @@ body {
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .formRow4 { grid-template-columns: repeat(2, 1fr); }
+  .formrow3 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-  .formRow2, .formRow4 { grid-template-columns: 1fr; }
+  .formrow1, .formrow3 { grid-template-columns: 1fr; }
 }
 
 /* =========================================================
