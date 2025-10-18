@@ -92,7 +92,7 @@
     {"min":8.5,"max":10000,"modelo":"SP-5 60","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024.pdf","imagen":""},
     {"min":3.95,"max":6.65,"modelo":"SP-5 Oxi 20","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"—","nominal":"6.63 gr/h","pdf":"TDS SP-5 Oxi ES TTO Biocida.pdf","imagen":""},
     {"min":6.65,"max":8.5,"modelo":"SP-5 Oxi 30","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"30 gr/h","nominal":"8.49 gr/h","pdf":"TDS SP-5 Oxi ES TTO Biocida.pdf","imagen":""},
-    {"min":8.5,"max":10000,"modelo":"SP-18","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-20 ES TTO Agua Ozonizada 2024.pdf","imagen":""},
+    {"min":8.5,"max":10000,"modelo":"SP-18","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-18 ES TTO Agua Ozonizada 2024.pdf","imagen":""},
     {"min":8.5,"max":10000,"modelo":"SP-20","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-20 ES TTO Agua Ozonizada 2024.pdf","imagen":""},
     {"min":3.95,"max":6.65,"modelo":"SP-21 20","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"20 gr/h","nominal":"6.63 gr/h","pdf":"TDS SP21 TTO Biocida.pdf","imagen":""},
     {"min":6.65,"max":8.5,"modelo":"SP-21 40","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"8.49 gr/h","pdf":"TDS SP21 TTO Biocida.pdf","imagen":""},
