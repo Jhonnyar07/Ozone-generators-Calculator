@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="es">
 <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cálculo de Generadores de Ozono</title>
@@ -200,6 +202,9 @@
             <h3 class="green">Producción requerida (g/h)</h3>
             <h3 id="Pr" class="big green"></h3>
             <div id="sistemasWater" class="cardsGrid"></div>
+              <div class="actions" id="pdfDownloadContainer">
+            <button class="btn primary" id="downloadPDF">📄 Descargar reporte en PDF</button>
+          </div>
           </div>
         </div>
 
@@ -270,6 +275,9 @@
               <div id="tableAir" class="tableWrap"></div>
               <canvas id="chartAir" height="200"></canvas>
             </div>
+              <div class="actions" id="pdfDownloadContainer">
+            <button class="btn primary" id="downloadPDF">📄 Descargar reporte en PDF</button>
+          </div>
           </div>
         </div>
       </div>

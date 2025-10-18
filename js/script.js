@@ -680,6 +680,37 @@ loginBtn.addEventListener('click', ()=>{
     ctx.restore();
   }
 
+  const downloadPDF = document.getElementById('downloadPDF');
+  if (downloadPDF) {
+    downloadPDF.addEventListener('click', async () => {
+      const { jsPDF } = window.jspdf;
+
+      // Selecciona el contenedor que quieras capturar
+      const captureArea = document.getElementById('airResults');
+
+      // Crea una imagen del contenido
+      const canvas = await html2canvas(captureArea, {
+        scale: 2,
+        backgroundColor: '#ffffff'
+      });
+      const imgData = canvas.toDataURL('image/png');
+
+      // Crea el PDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      // Calcula tamaño proporcional
+      const imgWidth = pageWidth - 20;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+
+      // Guarda el archivo
+      pdf.save('Reporte_Ozono_Aire.pdf');
+    });
+  }
+
   function clearChart(){ const ctx = chartAir.getContext('2d'); ctx.clearRect(0,0,chartAir.width,chartAir.height); }
 
   // init
