@@ -319,12 +319,9 @@ loginBtn.addEventListener('click', ()=>{
     if(isNaN(C_v)){ alert('❌ Introducir una concentración objetivo antes de calcular.'); return; }
 
     if(tipoInst.value === 'Agua Potable'){
-      const Tt = (((Vr_v/1000)/Qc_v)*60*1.25); // min
+      const Tt = (((Vr_v/1000)/Qc_v)*60); // min
       const Tr = ((Vr_v/1000)/Qr_v)*60; // min
       const Pe = (C_v * Qc_v);
-      //const Fstm = 0.9; // FS Transferencia de Masa
-      //const Fsrg = 0.8; // FS Rendimiento de Generacion
-      //const Fsgd = 1.5; // FS General de Diseño
       const Pr = (Fsgd*Pe)/(Fsrg*Fstm);
       TtOut.textContent = Number(Tt).toFixed(2);
       TrOut.textContent = Number(Tr).toFixed(2);

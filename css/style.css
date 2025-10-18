@@ -134,7 +134,7 @@ body {
 .formRow1 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .formRow3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-.formRow0 label
+.formRow0 label,
 .formRow1 label,
 .formRow3 label {
   font-size: 13px;
