@@ -420,3 +420,47 @@ footer {
   .formGrid { grid-template-columns: 1fr; }
   .cols3 { flex-direction: column; }
 }
+
+/* =========================================================
+   NOTA EXPLICATIVA DE PARÁMETROS (DEBAJO DE RESULTADOS)
+   ========================================================= */
+.noteBox {
+  background: var(--accent-light);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 12px 0 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.noteBox h4 {
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.noteBox p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.noteBox strong {
+  color: var(--accent-2);
+}
+
+/* =========================================================
+   ALERTA TÉCNICA - SISTEMAS RECOMENDADOS
+   ========================================================= */
+.alertaO3 {
+  background: #fff4e5;
+  border-left: 5px solid #ff9800;
+  color: #5c3b00;
+  font-size: 14px;
+  padding: 12px 18px;
+  margin: 10px auto 16px;
+  border-radius: 8px;
+  max-width: 780px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.alertaO3 strong {
+  color: #4a3000;
+}

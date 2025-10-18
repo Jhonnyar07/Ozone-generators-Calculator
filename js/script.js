@@ -83,21 +83,23 @@
     {"min":0,"max":0.42,"modelo":"SP 1g","gas":"Aire","caudal":"30 L/min","original":"0.41 gr/h","nominal":"0.41 gr/h","pdf":"TDS SP ES TTO Biocida 2024 (1g).pdf","imagen":""},
     {"min":0.42,"max":3.25,"modelo":"SP 2g","gas":"Aire","caudal":"30 L/min","original":"3.24 gr/h","nominal":"3.24 gr/h","pdf":"TDS SP ES TTO Biocida 2024 (2g).pdf","imagen":""},
     {"min":0.42,"max":3.95,"modelo":"SP 4g","gas":"Aire","caudal":"30 L/min","original":"3.94 gr/h","nominal":"3.94 gr/h","pdf":"TDS SP ES TTO Biocida 2024 (4g).pdf","imagen":""},
-    {"min":0.42,"max":5.1,"modelo":"SP-24","gas":"Oxígeno @90-94%","caudal":"1 L/min","original":"5 gr/h","nominal":"3.96 gr/h","pdf":"TDS SP-24 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/mcAZEg0.jpg"},
     {"min":3.95,"max":4.63,"modelo":"SP 8g","gas":"Aire","caudal":"30 L/min","original":"4.62 gr/h","nominal":"4.62 gr/h","pdf":"TDS SP ES TTO Biocida 2024 (8g).pdf","imagen":""},
     {"min":3.95,"max":6.4,"modelo":"SP 10g","gas":"Aire","caudal":"30 L/min","original":"6.38 gr/h","nominal":"6.38 gr/h","pdf":"TDS SP ES TTO Biocida 2024 (10g).pdf","imagen":""},
-    {"min":3.95,"max":6.65,"modelo":"SP-21 20","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"20 gr/h","nominal":"6.63 gr/h","pdf":"TDS SP21 TTO Biocida (20).pdf","imagen":"https://i.imgur.com/jVRU4mY.jpg"},
-    {"min":3.95,"max":6.65,"modelo":"SP-5 Oxi 20","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"—","nominal":"6.63 gr/h","pdf":"TDS SP-5 Oxi ES TTO Biocida (20).pdf","imagen":"https://i.imgur.com/j4Ujngv.jpg"},
-    {"min":6.65,"max":8.5,"modelo":"SP-5 Oxi 30","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"30 gr/h","nominal":"8.49 gr/h","pdf":"TDS SP-5 Oxi ES TTO Biocida (30).pdf","imagen":"https://i.imgur.com/j4Ujngv.jpg"},
-    {"min":6.65,"max":8.5,"modelo":"SP-21 40","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"8.49 gr/h","pdf":"TDS SP21 TTO Biocida (40).pdf","imagen":"https://i.imgur.com/jVRU4mY.jpg"},
-    {"min":8.5,"max":31.66,"modelo":"SP-22","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"31.65 gr/h","pdf":"TDS SP22 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/fA7a6Sn.jpg"},
-    {"min":8.5,"max":40.17,"modelo":"SP-23","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"80 gr/h","nominal":"40.16 gr/h","pdf":"TDS SP-23 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/6zK69Kq.jpg"},
-    {"min":8.5,"max":31.66,"modelo":"SP-25","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"31.65 gr/h","pdf":"TDS SP25 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/OI3WF8q.jpg"},
+    {"min":3.95,"max":4.5,"modelo":"SP 15g","gas":"Aire","caudal":"30 L/min","original":"4.48 gr/h","nominal":"6.38 gr/h","pdf":"TDS SP ES TTO Biocida 2024 (10g).pdf","imagen":""},
     {"min":8.5,"max":20.43,"modelo":"SP-5 20 gr","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"20 gr/h","nominal":"20.42 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024 (20).pdf","imagen":"https://i.imgur.com/j4Ujngv.jpg"},
     {"min":8.5,"max":31.66,"modelo":"SP-5 30","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"31.65 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024 (30).pdf","imagen":"https://i.imgur.com/gpKw594.jpg"},
-    {"min":8.5,"max":42.67,"modelo":"SP-5 45","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024 (45).pdf","imagen":"https://i.imgur.com/gpKw594.jpg"},
-    {"min":8.5,"max":42.67,"modelo":"SP-5 60","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024 (60).pdf","imagen":"https://i.imgur.com/gpKw594.jpg"},
-    {"min":8.5,"max":42.67,"modelo":"SP-20 60 gr","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-20 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/cJRniPE.jpg"}
+    {"min":8.5,"max":43,"modelo":"SP-5 45","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024 (45).pdf","imagen":"https://i.imgur.com/gpKw594.jpg"},
+    {"min":8.5,"max":10000,"modelo":"SP-5 60","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-5 ES TTO Biocida 2024 (60).pdf","imagen":"https://i.imgur.com/gpKw594.jpg"},
+    {"min":3.95,"max":6.65,"modelo":"SP-5 Oxi 20","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"—","nominal":"6.63 gr/h","pdf":"TDS SP-5 Oxi ES TTO Biocida (20).pdf","imagen":"https://i.imgur.com/j4Ujngv.jpg"},
+    {"min":6.65,"max":8.5,"modelo":"SP-5 Oxi 30","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"30 gr/h","nominal":"8.49 gr/h","pdf":"TDS SP-5 Oxi ES TTO Biocida (30).pdf","imagen":"https://i.imgur.com/j4Ujngv.jpg"},
+    {"min":8.5,"max":10000,"modelo":"SP-18","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-20 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/cJRniPE.jpg"},
+    {"min":8.5,"max":10000,"modelo":"SP-20","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"60 gr/h","nominal":"42.66 gr/h","pdf":"TDS SP-20 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/cJRniPE.jpg"},
+    {"min":3.95,"max":6.65,"modelo":"SP-21 20","gas":"Oxígeno @90-94%","caudal":"1.5 L/min","original":"20 gr/h","nominal":"6.63 gr/h","pdf":"TDS SP21 TTO Biocida (20).pdf","imagen":"https://i.imgur.com/jVRU4mY.jpg"},
+    {"min":6.65,"max":8.5,"modelo":"SP-21 40","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"8.49 gr/h","pdf":"TDS SP21 TTO Biocida (40).pdf","imagen":"https://i.imgur.com/jVRU4mY.jpg"},
+    {"min":8.5,"max":31.66,"modelo":"SP-22","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"31.65 gr/h","pdf":"TDS SP22 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/fA7a6Sn.jpg"},
+    {"min":8.5,"max":10000,"modelo":"SP-23","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"80 gr/h","nominal":"40.16 gr/h","pdf":"TDS SP-23 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/6zK69Kq.jpg"},
+    {"min":0.42,"max":5.1,"modelo":"SP-24","gas":"Oxígeno @90-94%","caudal":"1 L/min","original":"5 gr/h","nominal":"3.96 gr/h","pdf":"TDS SP-24 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/mcAZEg0.jpg"},
+    {"min":8.5,"max":31.66,"modelo":"SP-25","gas":"Oxígeno @90-94%","caudal":"10 L/min","original":"40 gr/h","nominal":"31.65 gr/h","pdf":"TDS SP25 ES TTO Agua Ozonizada 2024.pdf","imagen":"https://i.imgur.com/OI3WF8q.jpg"},
   ]];
 
   // pump data
@@ -373,11 +375,17 @@ loginBtn.addEventListener('click', ()=>{
     sistemasWater.parentElement.insertBefore(subtitulo, sistemasWater);
   }
 
-  if (Pr > 50) {
-    const note = document.createElement('div');
-    note.className = 'cardSmall';
-    note.innerHTML = `<h5>NOTA</h5><p>Para concentraciones mayores a 50 gr/h considere la combinación de 2 o más sistemas.</p>`;
-    sistemasWater.appendChild(note);
+  // 🔹 Alerta por alta concentración — se muestra debajo del título "Sistemas Recomendados"
+  if (Pr > 43) {
+    const alerta = document.createElement('div');
+    alerta.className = 'alertaO3';
+    alerta.innerHTML = `
+      ⚠️ <strong>Nota técnica:</strong> Para concentraciones mayores a <strong>43 g/h</strong>, 
+      se recomienda la combinación de <strong>dos o más sistemas</strong>.
+    `;
+    // Insertar justo debajo del subtítulo "Sistemas Recomendados"
+    const subtitulo = document.getElementById('subtituloSistemas');
+    if (subtitulo) subtitulo.insertAdjacentElement('afterend', alerta);
   }
 
   if (recomendados.length === 0) {
