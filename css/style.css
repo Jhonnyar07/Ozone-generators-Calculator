@@ -360,24 +360,29 @@ footer {
   .cols3 { flex-direction: column; }
 }
 
+/* Asegura que las filas ocupen todo el ancho del panel */
+#waterControls .calcRow {
+  width: 100%;
+  display: block;
+}
+
+/* Mantiene el sistema de grid interno para inputs y selects */
 #waterControls .calcRow.formRow2,
 #waterControls .calcRow.formRow4 {
   display: grid;
   width: 100%;
   gap: 16px;
+  align-items: center;
 }
 
-/* 2 columnas */
 #waterControls .calcRow.formRow2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-
-/* 4 columnas */
 #waterControls .calcRow.formRow4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-/* Adaptable a pantallas pequeñas */
+/* En tablets y móviles */
 @media (max-width: 1024px) {
   #waterControls .calcRow.formRow4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -388,4 +393,20 @@ footer {
   #waterControls .calcRow.formRow4 {
     grid-template-columns: 1fr;
   }
+}
+
+/* Centrar texto de “Producción requerida” */
+#waterResults h3.green {
+  text-align: center;
+  color: var(--accent-2);
+  margin-top: 18px;
+}
+
+#waterResults #Pr {
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  color: #0085a6;
+  font-weight: 700;
+  margin-top: 6px;
 }
