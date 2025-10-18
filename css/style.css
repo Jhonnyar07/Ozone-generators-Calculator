@@ -360,44 +360,4 @@ footer {
   .cols3 { flex-direction: column; }
 }
 
-/* Nueva fila de 3 columnas */
-.formRow3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-  margin: 16px 0;
-}
 
-.formRow3 > div {
-  width: 100%;
-}
-
-.formRow3 label {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-  display: block;
-}
-
-.formRow3 input,
-.formRow3 select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #e6eef2;
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text-main);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .formRow3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .formRow3 {
-    grid-template-columns: 1fr;
-  }
-}

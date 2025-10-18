@@ -43,22 +43,18 @@
         <!-- Water controls -->
         <div id="waterControls" class="panel">
           <h3>Parámetros de diseño (Agua)</h3>
-
           <div class="formGrid">
-
-            <!-- 🟦 Fila 0: Tipo de instalación -->
-            <label for="tipoInst">Tipo de Instalación</label>
+            <label>Tipo de Instalación</label>
             <select id="tipoInst">
               <option value="">-- Seleccionar Tipo de Instalación --</option>
               <option value="Agua Potable">Agua Potable</option>
               <option value="Aguas Residuales">Aguas Residuales</option>
             </select>
-
-            <!-- 🟦 Fila 1: Bomba, cantidad y caudal recirculación -->
-            <div class="formRow3">
+            <!-- 🔹 Fila 1: 2 columnas -->
+            <div class="formRow2">
               <div>
                 <label for="pumpSelect">Bomba de recirculación</label>
-                <select id="pumpSelect">
+                <select id="pumpSelect" aria-label="Bomba de recirculación">
                   <option value="">-- Seleccionar --</option>
                   <option value="CM 3-5">CM 3-5</option>
                   <option value="CM 5-7">CM 5-7</option>
@@ -71,39 +67,10 @@
                 <label for="npump">Cantidad de bombas (paralelo)</label>
                 <input id="npump" type="number" min="1" value="1">
               </div>
-              <div>
-                <label for="Qr">Caudal de recirculación (m³/h)</label>
-                <input id="Qr" type="number" min="0" step="any">
-              </div>
             </div>
 
-             <!-- 🟦 Fila 2: Tabla desplazable -->
-            <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
-              <h3>Datos de la bomba seleccionada</h3>
-              <div id="pumpTableScroll">
-                <table id="pumpTable">
-                  <thead>
-                    <tr>
-                      <th>Consumo (Watts)</th>
-                      <th>Velocidad (RPM)</th>
-                      <th>Caudal (m³/h)</th>
-                      <th>Altura (m)</th>
-                      <th>P. trabajo @-22/55 ºC (Bar)</th>
-                      <th>P. Descarga (Bar)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td colspan="6" class="muted">Seleccione una bomba</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="actions hidden" id="pumpDownloadContainer">
-                <button id="downloadPumpPDF" class="btn primary">Descargar Ficha Técnica</button>
-              </div>
-            </div>
-
-            <!-- 🟦 Fila 3: Volumen, caudal consumo, concentración -->
-            <div class="formRow3">
+            <!-- 🔹 Fila 2: 4 columnas -->
+            <div class="formRow4">
               <div>
                 <label for="Vr">Volumen del recipiente (Litros)</label>
                 <input id="Vr" type="number" min="0" step="any">
@@ -113,13 +80,91 @@
                 <input id="Qc" type="number" min="0" step="any">
               </div>
               <div>
+                <label for="Qr">Caudal de recirculación (m³/h)</label>
+                <input id="Qr" type="number" min="0" step="any">
+              </div>
+              <div>
                 <label for="C">Concentración objetivo (PPM)</label>
                 <input id="C" type="number" min="0" step="any">
               </div>
             </div>
           </div>
-        </div>
 
+          <!-- Pump data table appears here -->
+          <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
+            <h3>Datos de la bomba seleccionada</h3>
+            <div id="pumpTableScroll">
+              <table id="pumpTable">
+                <thead>
+                  <tr>
+                    <th>Consumo (Watts)</th>
+                    <th>Velocidad (RPM)</th>
+                    <th>Caudal (m³/h)</th>
+                    <th>Altura (m)</th>
+                    <th>P. trabajo @-22/55 ºC (Bar)</th>
+                    <th>P. Descarga (Bar)</th>
+                  </tr>
+                </thead>
+                <tbody><tr><td colspan="6" class="muted">Seleccione una bomba</td></tr></tbody>
+              </table>
+            </div>
+            <!-- Botón fuera del desplazamiento -->
+            <div class="actions hidden" id="pumpDownloadContainer">
+              <button id="downloadPumpPDF" class="btn primary">Descargar Ficha Técnica</button>
+            </div>
+          </div>
+          <div id="resumenPump" class="muted small"></div>
+
+          <div id="contaminantes" class="formGrid hidden">
+            <label>Fe (g/m3)</label><input id="Fe" type="number" step="any" value="0">
+            <label>Mn (g/m3)</label><input id="Mn" type="number" step="any" value="0">
+            <label>DQO (g/m3)</label><input id="DQO" type="number" step="any" value="0">
+            <label>DBO (g/m3)</label><input id="DBO" type="number" step="any" value="0">
+            <div class="muted">Elementos contaminantes (gr/h): <span id="CmVal">0</span></div>
+          </div>
+
+          <div id="factoresSeguridad" class="card">
+            <div class="factores-grid">
+              <div>
+                <p class="label">Factor de Seguridad por Transferencia de Masa</p>
+                <p id="FstmVal" class="big">0.9</p>
+              </div>
+              <div>
+                <p class="label">Factor de Seguridad por Rendimiento de Generación</p>
+                <p id="FsrgVal" class="big">0.8</p>
+              </div>
+              <div>
+                <p class="label">Factor de Seguridad General de Diseño</p>
+                <p id="FsgdVal" class="big">1.5</p>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="calcWater" class="btn primary">Calcular</button>
+            <button id="resetWater" class="btn">Reset</button>
+          </div>
+
+          <div id="waterResults" class="results hidden card">
+            <h4>Resultados</h4>
+            <div class="cols3">
+              <div>
+                <p class="label">Tiempo de tratamiento completo vaso principal (min)</p>
+                <p id="Tt" class="big"></p>
+              </div>
+              <div>
+                <p class="label">Tiempo de recirculación en tanque (min/h)</p>
+                <p id="Tr" class="big"></p>
+              </div>
+              <div>
+                <p class="label">Producción mínima esperada (g/h)</p>
+                <p id="Pe" class="big"></p>
+              </div>
+            </div>
+            <h3 class="green">Producción requerida (g/h):</h3>
+            <h3 id="Pr" class="big green"></h3>
+          </div>
+          <div id="sistemasWater" class="cardsGrid"></div>
+        </div>
 
         <!-- Air controls -->
         <div id="airControls" class="panel hidden">
@@ -182,7 +227,7 @@
       </footer>
     </section>
   </main>
-</body>
 
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
+</body>
 </html>
