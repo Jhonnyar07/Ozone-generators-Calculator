@@ -69,6 +69,31 @@
               </div>
             </div>
 
+            <!-- Pump data table appears here -->
+            <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
+              <h3>Datos de la bomba seleccionada</h3>
+              <div id="pumpTableScroll">
+                <table id="pumpTable">
+                  <thead>
+                    <tr>
+                      <th>Consumo (Watts)</th>
+                      <th>Velocidad (RPM)</th>
+                      <th>Caudal (m³/h)</th>
+                      <th>Altura (m)</th>
+                      <th>P. trabajo @-22/55 ºC (Bar)</th>
+                      <th>P. Descarga (Bar)</th>
+                    </tr>
+                  </thead>
+                  <tbody><tr><td colspan="6" class="muted">Seleccione una bomba</td></tr></tbody>
+                </table>
+              </div>
+              <!-- Botón fuera del desplazamiento -->
+              <div class="actions hidden" id="pumpDownloadContainer">
+                <button id="downloadPumpPDF" class="btn primary">Descargar Ficha Técnica</button>
+              </div>
+            </div>
+            <div id="resumenPump" class="muted small"></div>
+
             <!-- 🔹 Fila 2: 4 columnas -->
             <div class="formRow4">
               <div>
@@ -90,30 +115,7 @@
             </div>
           </div>
 
-          <!-- Pump data table appears here -->
-          <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
-            <h3>Datos de la bomba seleccionada</h3>
-            <div id="pumpTableScroll">
-              <table id="pumpTable">
-                <thead>
-                  <tr>
-                    <th>Consumo (Watts)</th>
-                    <th>Velocidad (RPM)</th>
-                    <th>Caudal (m³/h)</th>
-                    <th>Altura (m)</th>
-                    <th>P. trabajo @-22/55 ºC (Bar)</th>
-                    <th>P. Descarga (Bar)</th>
-                  </tr>
-                </thead>
-                <tbody><tr><td colspan="6" class="muted">Seleccione una bomba</td></tr></tbody>
-              </table>
-            </div>
-            <!-- Botón fuera del desplazamiento -->
-            <div class="actions hidden" id="pumpDownloadContainer">
-              <button id="downloadPumpPDF" class="btn primary">Descargar Ficha Técnica</button>
-            </div>
-          </div>
-          <div id="resumenPump" class="muted small"></div>
+
 
 
 
