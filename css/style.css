@@ -694,3 +694,57 @@ footer {
   padding: 0 !important;
 }
 
+/* Contenedor del título principal */
+#mainTitle {
+  text-align: center;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  color: #2e7a90;
+  letter-spacing: 0.6px;
+  line-height: 1.1;
+  padding: 1rem 1rem;
+  margin: 0.3rem auto 1.8rem;
+  width: 97%;
+  max-width: 1080px;
+  background: #ffffff; /* tono más marcado */
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15,23,36,0.06);
+  position: relative;
+}
+
+/* Línea decorativa */
+#mainTitle::after {
+  content: "";
+  display: block;
+  width: 250px;
+  height: 3px;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, #4cb0c9, #276a80);
+  border-radius: 3px;
+}
+
+/* Texto superior */
+#mainTitle .light {
+  font-weight: 350;
+  font-size: 1.3rem;
+  color: #5da3b5;
+  margin-bottom: 1px;
+}
+
+/* Texto principal */
+#mainTitle .strong {
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: #00A7C8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

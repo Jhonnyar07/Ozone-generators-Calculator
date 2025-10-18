@@ -1,4 +1,4 @@
-// script.js - versión completa con lógica del Streamlit original
+// script.js - versión completa con lógica
 (() => {
   const USERS = {"asp":"asepsia","Asp":"asepsia","Franquicia":"Fr4nquicia","franquicia":"fr4nquicia"};
   // DOM refs
@@ -65,7 +65,7 @@
 
   const pdfMap = {}; // ajustar si se colocan PDFs
 
-  // sistemas (copiado del python)
+  // sistemas
   const sistemas = [...[
     {"min":0,"max":0.02,"modelo":"ZHI1250","gas":"Aire","caudal":"8 L/min","original":"0.01 gr/h","nominal":"0.01 gr/h","pdf":"TDS Z-ZHI ES TTO Biocida 2024 (1250).pdf","imagen":""},
     {"min":0,"max":0.04,"modelo":"ZHI3000","gas":"Aire","caudal":"8 L/min","original":"0.03 gr/h","nominal":"0.03 gr/h","pdf":"TDS Z-ZHI ES TTO Biocida 2024 (3000).pdf","imagen":""},
@@ -122,6 +122,7 @@
 
   // genTable
   const genTable = {
+    "-- Seleccionar Generador de Ozono --": {Qg:null, Pr:null},
     "Calculo sin generador asignado": {Qg:null, Pr:null},
     "Z1250T": {Qg:518, Pr:0.02},
     "Z3000T": {Qg:518, Pr:0.03},
@@ -174,10 +175,24 @@
 loginBtn.addEventListener('click', ()=>{
   const u = usernameInput.value.trim();
   const p = passwordInput.value;
-  if(!u || !p){ loginMsg.textContent = 'Introduce usuario y contraseña'; return; }
+  if(!u || !p){ alert('⚠️ Introduce usuario y contraseña ⚠️'); return; }
 
-  const isAsp = (u.toLowerCase() === 'asp' && p === 'asepsia');
-  const isFranq = (u.toLowerCase() === 'franquicia' && p === 'fr4nquicia');
+  // 🔹 Listas de usuarios por nivel
+  const aspUsers = [
+    { user: 'asp', pass: 'asepsia' },
+    { user: 'jaguilar', pass: 'Paf07664' },
+    { user: 'asanchez', pass: 'andr3s' }
+  ];
+
+  const franquiciaUsers = [
+    { user: 'franquicia', pass: 'fr4nquicia' },
+    { user: 'girona', pass: 'g1r0n4' },
+    { user: 'valencia', pass: 'v4lenc1a' }
+  ];
+
+  // 🔹 Funciones de validación
+  const isAsp = aspUsers.some(uData => u.toLowerCase() === uData.user && p === uData.pass);
+  const isFranq = franquiciaUsers.some(uData => u.toLowerCase() === uData.user && p === uData.pass);
 
   if(isAsp || isFranq){
     session.logueado = true;
@@ -188,43 +203,50 @@ loginBtn.addEventListener('click', ()=>{
     loginMsg.textContent = '';
 
   // 🔒 Restricciones para franquicia
-  if(isFranq){
-  // 🔒 Bloquear campos de entrada en Ozono Aire
-  [Qg, PrAir].forEach(el => {
-    el.disabled = true;
-    el.style.opacity = '0.6';
-    el.style.cursor = 'not-allowed';
-  });
+  if (isFranq) {
+    // 🔹 Ocultar completamente los campos y sus labels en Ozono Aire
+    ['Qg', 'PrAir'].forEach(id => {
+      const input = document.getElementById(id);
+      const label = document.querySelector(`label[for="${id}"]`) || input?.closest('div')?.querySelector('label');
 
-  // 🧩 Eliminar la opción "Calculo sin generador asignado"
-  const noGenOpt = genSelect.querySelector('option[value="Calculo sin generador asignado"]');
-  if (noGenOpt) noGenOpt.remove();
+      // Ocultar campo
+      if (input) input.style.display = 'none';
 
-  // 🛈 Aviso visual para el usuario franquicia
-  const notice = document.createElement('p');
-  notice.textContent = '🔒 Modo franquicia: no se pueden modificar Caudal ni Producción. Opción "Cálculo sin generador asignado" eliminada.';
-  notice.className = 'muted small';
-  airControls.querySelector('.formGrid').appendChild(notice);
-}
+      // Ocultar label correspondiente
+      if (label) label.style.display = 'none';
+
+      // Ocultar el contenedor padre si sigue dejando espacio
+      const contenedor = input?.closest('div');
+      if (contenedor) contenedor.style.display = 'none';
+    });
+
+    // 🧩 Eliminar la opción "Calculo sin generador asignado"
+    const noGenOpt = genSelect.querySelector('option[value="Calculo sin generador asignado"]');
+    if (noGenOpt) noGenOpt.remove();
+  }
   } else {
-    loginMsg.textContent = 'Usuario o contraseña incorrectos';
+    
   }
 
   const mainHeader = document.getElementById('mainHeader');
 
-  if (USERS[u] && USERS[u] === p) {
+  if (
+    aspUsers.some(user => user.user === u.toLowerCase() && user.pass === p) ||
+    franquiciaUsers.some(user => user.user === u.toLowerCase() && user.pass === p)
+  ) {
     session.logueado = true;
-    session.franchise = (u.toLowerCase() === 'franquicia' || u === 'Franquicia');
-    session.asp = (u === 'asp' || u === 'Asp');
+    session.franchise = franquiciaUsers.some(user => user.user === u.toLowerCase() && user.pass === p);
+    session.asp = aspUsers.some(user => user.user === u.toLowerCase() && user.pass === p);
+
     loginSection.classList.add('hidden');
     appSection.classList.remove('hidden');
     loginMsg.textContent = '';
 
-  // 🔹 Mostrar el título solo después de iniciar sesión
-  mainHeader.style.display = 'block';
-} else {
-  loginMsg.textContent = 'Usuario o contraseña incorrectos';
-}
+    // 🔹 Mostrar el título solo después de iniciar sesión
+    mainHeader.style.display = 'block';
+  } else {
+    alert('❌ Usuario o contraseña incorrectos.'); // ⬅️ Ventana emergente nativa
+  }
 });
 
 
@@ -451,7 +473,7 @@ loginBtn.addEventListener('click', ()=>{
 
   fi.addEventListener('input', ()=>{ fiVal.textContent = fi.value; });
 
-  calcAir.addEventListener('click', ()=>{
+  calcAir.addEventListener('click', () => {
     const g = genSelect.value;
     let Qg_v = Number(Qg.value);
     let Pr_v = Number(PrAir.value);
@@ -460,17 +482,24 @@ loginBtn.addEventListener('click', ()=>{
     const fi_v = Number(fi.value);
     const k = 1.65;
 
-    if(!g){ alert('❌ Seleccionar Generador para proceder con el calculo.'); return; }
-    if(!Vei_v){ alert('❌ Introducir un Volumen antes de calcular.'); return; }
-    if((isNaN(Qg_v) || Qg_v===0) && (genSelect.value==='Calculo sin generador asignado')){ alert('❌ Introducir un Valor de caudal antes de calcular.'); return; }
-    if((isNaN(Pr_v) || Pr_v===0) && (genSelect.value==='Calculo sin generador asignado')){ alert('❌ Introducir un Valor de producción antes de calcular.'); return; }
+    // 🔹 Validaciones de entrada
+    if (!g || g === '-- Seleccionar Generador de Ozono --') { alert('❌ Seleccionar Generador para proceder con el cálculo.'); return;}
+    if (!airUnit_v) {alert('❌ Seleccionar una unidad de volumen (m³ o L) antes de calcular.'); return;}
+    if (!Qg_v) { alert('❌ Introducir un Valor de caudal antes de calcular.'); return;}
+    if (!Pr_v) { alert('❌ Introducir un Valor de producción antes de calcular.'); return;}
+    if (!Vei_v) { alert('❌ Introducir un Volumen antes de calcular.'); return; }
+
+
+    // ===============================
+    //  CÁLCULO PRINCIPAL OZONO AIRE
+    // ===============================
 
     let Ve;
-    if(airUnit_v === 'm3'){ Ve = Vei_v * 1000; } else Ve = Vei_v;
-    if(genTable[g] && (genTable[g].Qg !== null) && (!Qg_v || Qg_v===0)) Qg_v = genTable[g].Qg;
-    if(genTable[g] && (genTable[g].Pr !== null) && (!Pr_v || Pr_v===0)) Pr_v = genTable[g].Pr;
+    if (airUnit_v === 'm3') { Ve = Vei_v * 1000; } else Ve = Vei_v;
+    if (genTable[g] && (genTable[g].Qg !== null) && (!Qg_v || Qg_v === 0)) Qg_v = genTable[g].Qg;
+    if (genTable[g] && (genTable[g].Pr !== null) && (!Pr_v || Pr_v === 0)) Pr_v = genTable[g].Pr;
     let Co = 0;
-    if(Pr_v && Qg_v){ Co = (Pr_v / (Qg_v*60)) * 1000; } else Co = 0;
+    if (Pr_v && Qg_v) { Co = (Pr_v / (Qg_v * 60)) * 1000; } else Co = 0;
     CoOut.textContent = Number(Co).toFixed(4);
     fiOut.textContent = fi_v;
     kVal.textContent = k;
@@ -479,29 +508,29 @@ loginBtn.addEventListener('click', ()=>{
     const c = new Array(steps).fill(0);
     const ppm = new Array(steps).fill(0);
     const dt = 0.1;
-    const rate = (Qg_v*60)/Ve;
-    for(let i=0;i<steps;i++){
-      if(i===0){ c[i]=0; ppm[i]=0; continue; }
-      const prev = c[i-1];
-      const next = prev + dt * ( -k*prev + rate*((Co/1000) - prev) - fi_v*rate*prev );
+    const rate = (Qg_v * 60) / Ve;
+    for (let i = 0; i < steps; i++) {
+      if (i === 0) { c[i] = 0; ppm[i] = 0; continue; }
+      const prev = c[i - 1];
+      const next = prev + dt * (-k * prev + rate * ((Co / 1000) - prev) - fi_v * rate * prev);
       c[i] = next;
       ppm[i] = next * (1000000 * 0.51);
     }
     const times = [];
-    for(let i=0;i<steps;i++) times.push(i*6);
+    for (let i = 0; i < steps; i++) times.push(i * 6);
 
-  // 🔹 Generar tabla y gráfica al mismo tiempo
-  tableAir.innerHTML = ''; // Limpia cualquier tabla previa
-  clearChart(); // Limpia gráfica anterior si la hay
+    // 🔹 Generar tabla y gráfica al mismo tiempo
+    tableAir.innerHTML = ''; // Limpia cualquier tabla previa
+    clearChart(); // Limpia gráfica anterior si la hay
 
-  // Primero genera la tabla
-  renderAirTable(times, c, ppm);
+    // Primero genera la tabla
+    renderAirTable(times, c, ppm);
 
-  // Luego genera la gráfica en el siguiente ciclo del render
-  setTimeout(() => renderAirChart(times, ppm), 0);
+    // Luego genera la gráfica en el siguiente ciclo del render
+    setTimeout(() => renderAirChart(times, ppm), 0);
 
-  // Mostrar resultados
-  airResults.classList.remove('hidden');
+    // Mostrar resultados
+    airResults.classList.remove('hidden');
   });
 
   resetAir.addEventListener('click', ()=>{
