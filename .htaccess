@@ -1,5 +1,42 @@
-<FilesMatch "\.(js|css|html|php)$">
-  Header set Cache-Control "no-cache, no-store, must-revalidate"
-  Header set Pragma "no-cache"
-  Header set Expires "0"
+# ==========================
+# CONFIGURACIÓN ANTI-CACHÉ
+# ==========================
+
+<IfModule mod_headers.c>
+  # Evitar caché en navegadores y proxies
+  <FilesMatch "\.(html|php|js|css)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
+
+# ==========================
+# REDIRECCIÓN OPCIONAL (HTTPS)
+# ==========================
+# Si querés forzar siempre HTTPS, descomenta estas líneas:
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} !=on
+#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# ==========================
+# CABECERAS DE SEGURIDAD
+# ==========================
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "no-referrer-when-downgrade"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# ==========================
+# BLOQUEAR ACCESO A ARCHIVOS SENSIBLES
+# ==========================
+<FilesMatch "(\.htaccess|\.env|composer\.json|composer\.lock)$">
+  Order allow,deny
+  Deny from all
 </FilesMatch>
