@@ -53,11 +53,11 @@
         <hr/>
 
         <!-- =========================
-             SECCIÓN OZONO AGUA
+             Ozone Water Section
         ========================== -->
         <div id="waterControls" class="panel">
-          <h3 id="tituloAgua">Parámetros de diseño (Agua)</h3>
-          <!-- 🔹 Fila 0: Tipo de instalación -->
+          <h3 id="tituloAgua">Parámetros de diseño</h3>
+          <!-- Row 0 -->
           <div class="formRow0">
             <div>
               <label for="tipoInst">Tipo de Instalación</label>
@@ -69,7 +69,7 @@
             </div>
           </div>
 
-          <!-- 🔹 Fila 1: Bomba, cantidad y caudal de recirculación -->
+          <!-- Row 1 -->
           <div class="formRow1">
             <div>
               <label for="pumpSelect">Bomba de recirculación</label>
@@ -92,7 +92,7 @@
             </div>
           </div>
 
-          <!-- 🔹 Fila 2: Tabla de bomba -->
+          <!-- Row 2 -->
           <div id="pumpTableContainer" class="card small hidden" aria-live="polite">
             <div id="pumpTableScroll">
               <table id="pumpTable">
@@ -114,7 +114,7 @@
             </div>
           </div>
 
-          <!-- 🔹 Fila 3: Volumen, caudal de consumo y concentración -->
+          <!-- Row 3 -->
           <div class="formRow3">
             <div>
               <label for="Vr">Volumen del recipiente (Litros)</label>
@@ -130,7 +130,7 @@
             </div>
           </div>
 
-          <!-- 🔹 Contaminantes (solo si Aguas Residuales) -->
+          <!-- Pollutants (If residul waters) -->
           <div id="contaminantes" class="hidden">
             <div class="cont-item">
               <label>Fe (g/m3)</label>
@@ -153,7 +153,7 @@
             </div>
           </div>
 
-          <!-- 🔹 Factores de seguridad -->
+          <!-- Security Factors -->
           <div id="factoresSeguridad" class="card">
             <div class="factores-grid">
               <div>
@@ -171,16 +171,16 @@
             </div>
           </div>
 
-          <!-- 🔹 Botones -->
+          <!-- Buttons -->
           <div class="actions">
             <button id="calcWater" class="btn primary">Calcular</button>
             <button id="resetWater" class="btn">Reset</button>
           </div>
 
-          <!-- 🔹 Resultados -->
+          <!-- Results -->
           <div id="waterResults" class="results hidden card">
             <h3 id="tituloAgua">Resultados</h3>
-            <!-- 🔹 Nota explicativa de resultados -->
+            <!-- Results Note -->
             <div id="notaParametros" class="card noteBox">
               <h4>🧩 Descripción de los parámetros</h4>
               <p><strong>Tiempo de tratamiento completo:</strong> Tiempo necesario para que el sistema vacíe el depósito aplicando todo el volumen de agua ozonizada, sin entrada de agua nueva.</p>
@@ -209,10 +209,10 @@
 
 
         <!-- =========================
-             SECCIÓN OZONO AIRE
+             Ozone Air Section
         ========================== -->
         <div id="airControls" class="panel hidden">
-          <h3 id="tituloAire">Parámetros de diseño (Aire)</h3>
+          <h3 id="tituloAire">Parámetros de diseño</h3>
           <div class="formGrid">
             <div>
               <label>Generador</label>

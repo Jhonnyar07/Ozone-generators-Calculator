@@ -1,4 +1,4 @@
-// script.js - versión completa con lógica
+// script.js - Complete version with logic
 (() => {
   // DOM refs
   const loginSection = document.getElementById('loginSection');
@@ -34,7 +34,6 @@
   const Fstm = document.getElementById("FstmVal").textContent;
   const Fsrg = document.getElementById("FsrgVal").textContent;
   const Fsgd = document.getElementById("FsgdVal").textContent;
-
   const waterResults = document.getElementById('waterResults');
   const TtOut = document.getElementById('Tt');
   const TrOut = document.getElementById('Tr');
@@ -62,9 +61,9 @@
 
   let session = { logueado:false, franchise:false, asp:false };
 
-  const pdfMap = {}; // ajustar si se colocan PDFs
+  const pdfMap = {}; // adjust if PDF
 
-  // sistemas
+  // Ozone Systems
   const sistemas = [...[
     {"min":0,"max":0.02,"modelo":"ZHI1250","gas":"Aire","caudal":"8 L/min","original":"0.01 gr/h","nominal":"0.01 gr/h","pdf":"TDS Z-ZHI ES TTO Biocida 2024.pdf","imagen":""},
     {"min":0,"max":0.04,"modelo":"ZHI3000","gas":"Aire","caudal":"8 L/min","original":"0.03 gr/h","nominal":"0.03 gr/h","pdf":"TDS Z-ZHI ES TTO Biocida 2024.pdf","imagen":""},
@@ -110,7 +109,7 @@
     "MATRIX/A 5-6T": {Co:1300,V:2850,Q:7.8,H:26.4,Pt:10,P:((26.4*9.8*1000)/100000)}
   };
 
-  // Map de fichas técnicas de bombas (ajusta rutas según tus archivos reales)
+  // Pumps Technical Data Sheet map
   const pumpPDFs = {
     "CM 3-5": "docs/96806804_CM_35_ARAEAVBE_CAAN.pdf",
     "CM 5-7": "docs/98645137_CM_57_ARAEAVBE_FAAN.pdf",
@@ -170,7 +169,7 @@
   }
   populateGenerators();
 
-// Login seguro con verificación en servidor (PHP)
+// Secure Login with Server validation (PHP)
   loginBtn.addEventListener('click', async () => {
     const u = usernameInput.value.trim();
     const p = passwordInput.value;
@@ -193,16 +192,16 @@
         session.asp = ['asp', 'jaguilar', 'asanchez'].includes(data.user);
         session.franchise = ['franquicia', 'girona', 'valencia'].includes(data.user);
 
-        // Mostrar aplicación y ocultar login
+        // Show the app and hide login
         loginSection.classList.add('hidden');
         appSection.classList.remove('hidden');
         loginMsg.textContent = '';
 
-        // Mostrar encabezado principal
+        // Show Initial Header
         const mainHeader = document.getElementById('mainHeader');
         if (mainHeader) mainHeader.style.display = 'block';
 
-        // 🔒 Si es franquicia, ocultar campos restringidos
+        // 🔒 If Franq, hide the selected fields
         if (session.franchise) {
           ['Qg', 'PrAir'].forEach(id => {
             const input = document.getElementById(id);
@@ -266,7 +265,7 @@
     }
   });
 
-  // Botón de descarga de ficha técnica
+  // TDS Download buttton
   downloadPumpPDF.addEventListener('click', ()=>{
     const selectedPump = pumpSelect.value;
     if (!selectedPump) {
@@ -275,7 +274,7 @@
     }
     const pdfPath = pumpPDFs[selectedPump];
     if (pdfPath) {
-      // Abre el PDF o fuerza la descarga
+      // Open the PDF or download it
       window.open(pdfPath, '_blank');
     } else {
       alert(`📄 No se encontró ficha técnica para la bomba "${selectedPump}".`);
@@ -301,8 +300,8 @@
     const Mnv = Number(Mn.value) || 0; // Manganeso
     const DQOv = Number(DQO.value) || 0; // DQO
     const DBOv = Number(DBO.value) || 0; // DBO
-    const Qcv = Number(Qc.value) || 0; // Caudal de Consumo
-    const Cm = ((Fev*0.44)+(Mnv*0.88)+(DQOv*1.5)+(DBOv*1.5))*Qcv; // Produccion necesaria para eliminar contaminantes
+    const Qcv = Number(Qc.value) || 0; // Output Flow
+    const Cm = ((Fev*0.44)+(Mnv*0.88)+(DQOv*1.5)+(DBOv*1.5))*Qcv; // Required production to kill pollutants
     CmVal.textContent = Cm.toFixed(2);
     return Cm;
   }
@@ -351,20 +350,20 @@
     Fe.value=0;Mn.value=0;DQO.value=0;DBO.value=0;CmVal.textContent='0';
     waterResults.classList.add('hidden'); sistemasWater.innerHTML=''; pumpTableContainer.classList.add('hidden');
 
-    // 🔹 Eliminar subtítulo si existe
+    // Delete subtitles
     const oldSubtitle = document.getElementById('subtituloSistemas');
     if (oldSubtitle) oldSubtitle.remove();
 
-    // 🔹 Eliminar alerta técnica si existe (buscando en todo el documento)
+    // Delete the alerts
     const alertaExistente = document.querySelector('.alertaO3');
     if (alertaExistente) alertaExistente.remove();
 
-    // 🔹 Limpiar cualquier otro contenido residual
+    // Clean the whole sheet
     sistemasWater.innerHTML = '';
   });
 
   function showSistemas(Pr) {
-  // Limpia el contenido previo y elimina subtítulo anterior si existe
+  // Clean the previous content
   sistemasWater.innerHTML = '';
   const oldSubtitle = document.getElementById('subtituloSistemas');
   if (oldSubtitle) oldSubtitle.remove();
@@ -373,7 +372,7 @@
 
   if (recomendados.length > 0) {
     const subtitulo = document.createElement('h3');
-    subtitulo.id = 'subtituloSistemas';   // 👈 para poder eliminarlo luego
+    subtitulo.id = 'subtituloSistemas'; 
     subtitulo.textContent = 'Sistemas Recomendados';
     subtitulo.style.marginTop = '18px';
     subtitulo.style.marginBottom = '12px';
@@ -381,12 +380,12 @@
     sistemasWater.parentElement.insertBefore(subtitulo, sistemasWater);
   }
 
-  // 🔹 Alerta por alta concentración — se muestra debajo del título "Sistemas Recomendados"
-  // 🔹 Eliminar alerta previa si existe
+  // High concentration alert
+  // Delete previous alert if exists
   const alertaPrev = document.querySelector('.alertaO3');
   if (alertaPrev) alertaPrev.remove();
 
-  // 🔹 Mostrar alerta solo si Pr > 43
+  // Alert just for Pr > 43
   if (Pr > 43) {
     const alerta = document.createElement('div');
     alerta.className = 'alertaO3';
@@ -395,7 +394,7 @@
       ⚠️ <strong>Nota técnica:</strong> Para concentraciones mayores a <strong>43 g/h</strong>, 
       se recomienda la combinación de <strong>dos o más sistemas</strong>.
     `;
-    // Insertar justo debajo del subtítulo "Sistemas Recomendados"
+
     const subtitulo = document.getElementById('subtituloSistemas');
     if (subtitulo) subtitulo.insertAdjacentElement('afterend', alerta);
   }
@@ -431,7 +430,7 @@
 
   
   // Air interactions
-  // Botones de unidad (m3 / L)
+  // Unit buttons (m3 / L)
   airUnitBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       airUnitBtns.forEach(b => b.classList.remove('active'));
@@ -460,7 +459,7 @@
     const fi_v = Number(fi.value);
     const k = 1.65;
 
-    // 🔹 Validaciones de entrada
+    // Input validation
     if (!g || g === '-- Seleccionar Generador de Ozono --') { alert('❌ Seleccionar Generador para proceder con el cálculo.'); return;}
     if (!airUnit_v) {alert('❌ Seleccionar una unidad de volumen (m³ o L) antes de calcular.'); return;}
     if (!Qg_v) { alert('❌ Introducir un Valor de caudal antes de calcular.'); return;}
@@ -468,10 +467,7 @@
     if (!Vei_v) { alert('❌ Introducir un Volumen antes de calcular.'); return; }
 
 
-    // ===============================
-    //  CÁLCULO PRINCIPAL OZONO AIRE
-    // ===============================
-
+    // Air calculations
     let Ve;
     if (airUnit_v === 'm3') { Ve = Vei_v * 1000; } else Ve = Vei_v;
     if (genTable[g] && (genTable[g].Qg !== null) && (!Qg_v || Qg_v === 0)) Qg_v = genTable[g].Qg;
@@ -497,17 +493,17 @@
     const times = [];
     for (let i = 0; i < steps; i++) times.push(i * 6);
 
-    // 🔹 Generar tabla y gráfica al mismo tiempo
-    tableAir.innerHTML = ''; // Limpia cualquier tabla previa
-    clearChart(); // Limpia gráfica anterior si la hay
+    // Table and chart generator
+    tableAir.innerHTML = ''; // Clean previous tables
+    clearChart(); // Clean previous charts
 
-    // Primero genera la tabla
+    // Table Generator
     renderAirTable(times, c, ppm);
 
-    // Luego genera la gráfica en el siguiente ciclo del render
+    // Chart generator
     setTimeout(() => renderAirChart(times, ppm), 0);
 
-    // Mostrar resultados
+    // Show results
     airResults.classList.remove('hidden');
   });
 
@@ -550,9 +546,9 @@
     const ctx = chartAir.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
 
-    // === Forzar ancho completo del contenedor ===
+    // force container width
     const containerWidth = chartAir.parentElement.clientWidth;
-    const height = 360; // altura visual equilibrada
+    const height = 360;
 
     chartAir.width = containerWidth * dpr;
     chartAir.height = height * dpr;
@@ -563,7 +559,6 @@
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, containerWidth, height);
 
-    // === Márgenes suaves ===
     const margin = { top: 25, right: 35, bottom: 50, left: 70 };
     const plotW = containerWidth - margin.left - margin.right;
     const plotH = height - margin.top - margin.bottom;
@@ -576,11 +571,11 @@
     const xScale = x => margin.left + ((x - xmin) / (xmax - xmin)) * plotW;
     const yScale = y => margin.top + plotH - ((y - ymin) / (ymax - ymin)) * plotH;
 
-    // === Fondo ===
+    // Background
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(margin.left, margin.top, plotW, plotH);
 
-    // === Cuadrícula ===
+    // grids
     ctx.strokeStyle = "#edf2f3";
     ctx.lineWidth = 1;
     const yTicks = 6;
@@ -593,7 +588,7 @@
       ctx.stroke();
     }
 
-    // === Ejes ===
+    // axis
     ctx.strokeStyle = "#c3d7da";
     ctx.lineWidth = 1.4;
     ctx.beginPath();
@@ -602,7 +597,7 @@
     ctx.lineTo(margin.left + plotW, margin.top + plotH);
     ctx.stroke();
 
-    // === Eje X ===
+    // X-axis
     const xTicks = 7;
     const xStep = (xmax - xmin) / xTicks;
     ctx.fillStyle = "#34495e";
@@ -615,7 +610,7 @@
       ctx.fillText(xVal.toFixed(0), x, margin.top + plotH + 6);
     }
 
-    // === Eje Y ===
+    // Y-axis
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
     for (let i = 0; i <= yTicks; i++) {
@@ -624,7 +619,7 @@
       ctx.fillText(yVal.toFixed(2), margin.left - 10, y);
     }
 
-    // === Línea de datos (degradado) ===
+    // Data Line
     const gradient = ctx.createLinearGradient(margin.left, margin.top, margin.left + plotW, margin.top);
     gradient.addColorStop(0, "#2a9d8f");
     gradient.addColorStop(1, "#006d77");
@@ -642,7 +637,7 @@
     }
     ctx.stroke();
 
-    // === Etiquetas de ejes ===
+    // axis tags
     ctx.fillStyle = "#0f172a";
     ctx.font = "13px 'Inter', system-ui, Arial";
     ctx.textAlign = "center";
