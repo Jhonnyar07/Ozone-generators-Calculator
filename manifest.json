@@ -1,15 +1,18 @@
 {
   "name": "ASP O3Studio",
   "short_name": "O3Studio",
-  "start_url": "/index.html",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#25A9BD",
   "theme_color": "#25A9BD",
   "icons": [
     {
       "src": "images/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
   ]
 }
